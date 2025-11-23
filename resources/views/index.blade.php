@@ -291,8 +291,8 @@
                         <div class="relative h-40 sm:h-48">
                             @php
                                 $logo = $m->profil?->logo
-                                    ? asset('public/storage/' . $m->profil->logo)
-                                    : asset('public/images/placeholder-band.jpg');
+                                    ? asset('storage/' . $m->profil->logo)
+                                    : asset('images/placeholder-band.jpg');
                             @endphp
                             <img src="{{ $logo }}" alt="Logo {{ $m->display_name }}"
                                 class="w-full h-full object-cover">
