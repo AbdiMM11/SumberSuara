@@ -1,8 +1,24 @@
 <!-- Music Player lengkap (desktop, mini, detail) dengan revisi modern dan fungsional -->
 
+@php
+    // Konstanta path icon & gambar supaya konsisten di HTML + JS
+    $ICON_LOVE = asset('public/icons/love.svg');
+    $ICON_LOVE_FILLED = asset('public/icons/love-filled.svg');
+    $ICON_REPEAT = asset('public/icons/repeat.svg');
+    $ICON_PREV = asset('public/icons/prev.svg');
+    $ICON_PLAY = asset('public/icons/play.svg');
+    $ICON_PAUSE = asset('public/icons/pause.svg');
+    $ICON_NEXT = asset('public/icons/next.svg');
+    $ICON_SHUFFLE = asset('public/icons/shuffle.svg');
+    $ICON_SOUND_ON = asset('public/icons/sound-on.svg');
+    $ICON_SOUND_OFF = asset('public/icons/sound-off.svg');
+
+    $IMG_PLACEHOLDER = asset('public/images/placeholder.jpg');
+@endphp
+
 <!-- Desktop Player -->
 <div id="desktop-player"
-     class="fixed bottom-0 inset-x-0 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA]
+    class="fixed bottom-0 inset-x-0 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA]
             text-white py-4 px-4 md:px-6 z-40 shadow-[0_-8px_25px_rgba(0,0,0,0.35)]
             border-t border-white/10 hidden">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
@@ -10,9 +26,7 @@
         <!-- Info Lagu dengan cover -->
         <div class="flex items-center gap-3 min-w-0 overflow-hidden">
             <div class="w-11 h-11 rounded-xl overflow-hidden bg-white/10 border border-white/20">
-                <img id="desktop-cover" src="public/images/placeholder.jpg"
-                     class="w-full h-full object-cover"
-                     alt="Cover" />
+                <img id="desktop-cover" src="{{ $IMG_PLACEHOLDER }}" class="w-full h-full object-cover" alt="Cover" />
             </div>
             <div class="min-w-0">
                 <p id="song-title" class="font-semibold text-sm md:text-base truncate">
@@ -28,64 +42,57 @@
         <div class="flex flex-col items-center space-y-2 w-1/2 max-w-xl">
 
             <div class="flex items-center gap-4 md:gap-6">
-                <button id="love-btn" type="button"
-                        class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="public/icons/love.svg" class="w-4 h-4" alt="Love" />
+                <button id="love-btn" type="button" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                    <img src="{{ $ICON_LOVE }}" class="w-4 h-4" alt="Love" />
                 </button>
-                <button id="repeat-btn" type="button"
-                        class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="public/icons/repeat.svg" class="w-4 h-4" alt="Repeat" />
+                <button id="repeat-btn" type="button" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                    <img src="{{ $ICON_REPEAT }}" class="w-4 h-4" alt="Repeat" />
                 </button>
-                <button id="prev-btn" type="button"
-                        class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="public/icons/prev.svg" class="w-4 h-4" alt="Previous" />
+                <button id="prev-btn" type="button" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                    <img src="{{ $ICON_PREV }}" class="w-4 h-4" alt="Previous" />
                 </button>
-                <button id="play-btn" type="button"
-                        class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img id="play-icon" src="public/icons/play.svg" class="w-6 h-6" alt="Play" />
+                <button id="play-btn" type="button" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                    <img id="play-icon" src="{{ $ICON_PLAY }}" class="w-6 h-6" alt="Play" />
                 </button>
-                <button id="next-btn" type="button"
-                        class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="public/icons/next.svg" class="w-4 h-4" alt="Next" />
+                <button id="next-btn" type="button" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                    <img src="{{ $ICON_NEXT }}" class="w-4 h-4" alt="Next" />
                 </button>
                 <button id="shuffle-btn" type="button"
-                        class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="public/icons/shuffle.svg" class="w-4 h-4" alt="Shuffle" />
+                    class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                    <img src="{{ $ICON_SHUFFLE }}" class="w-4 h-4" alt="Shuffle" />
                 </button>
             </div>
 
             <div class="flex items-center space-x-2 w-full text-[11px] md:text-xs">
                 <span id="current-time" class="min-w-[38px] text-right">00:00</span>
                 <input type="range" id="progress" value="0" min="0" max="100"
-                       class="w-full h-1 accent-white/90 bg-white/20 rounded-full cursor-pointer">
+                    class="w-full h-1 accent-white/90 bg-white/20 rounded-full cursor-pointer">
                 <span id="duration" class="min-w-[38px]">00:00</span>
             </div>
         </div>
 
         <!-- Volume -->
         <div class="flex items-center space-x-2">
-            <button id="mute-btn" type="button"
-                    class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                <img id="volume-icon" src="public/icons/sound-on.svg" class="w-4 h-4" alt="Volume" />
+            <button id="mute-btn" type="button" class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                <img id="volume-icon" src="{{ $ICON_SOUND_ON }}" class="w-4 h-4" alt="Volume" />
             </button>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1"
-                   class="w-20 accent-white/90 bg-white/20 rounded-full cursor-pointer">
+                class="w-20 accent-white/90 bg-white/20 rounded-full cursor-pointer">
         </div>
     </div>
 </div>
 
 <!-- Mobile Mini Player -->
 <div id="mobile-player"
-     class="fixed bottom-16 inset-x-0 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA]
+    class="fixed bottom-16 inset-x-0 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA]
             text-white py-2.5 px-3 z-50 shadow-[0_-6px_22px_rgba(0,0,0,0.4)]
             border-t border-white/10 md:hidden cursor-pointer hidden">
     <div class="max-w-7xl mx-auto flex items-center justify-between gap-3">
 
         <div class="flex items-center gap-3 min-w-0">
             <div class="w-10 h-10 rounded-xl overflow-hidden bg-white/10 border border-white/20">
-                <img id="mobile-mini-cover" src="public/images/placeholder.jpg"
-                     class="w-full h-full object-cover"
-                     alt="Cover" />
+                <img id="mobile-mini-cover" src="{{ $IMG_PLACEHOLDER }}" class="w-full h-full object-cover"
+                    alt="Cover" />
             </div>
             <div class="min-w-0">
                 <p id="mobile-song-title" class="font-semibold text-sm truncate">
@@ -99,12 +106,12 @@
 
         <div class="flex items-center gap-2">
             <button id="mobile-love-btn" type="button"
-                    class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                <img src="public/icons/love.svg" class="w-5 h-5" alt="Love" />
+                class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                <img src="{{ $ICON_LOVE }}" class="w-5 h-5" alt="Love" />
             </button>
             <button id="mobile-play-btn" type="button"
-                    class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                <img id="mobile-play-icon" src="public/icons/play.svg" class="w-6 h-6" alt="Play" />
+                class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
+                <img id="mobile-play-icon" src="{{ $ICON_PLAY }}" class="w-6 h-6" alt="Play" />
             </button>
         </div>
     </div>
@@ -112,7 +119,7 @@
 
 <!-- Mobile Detail Player (Full View) -->
 <div id="mobile-detail-player"
-     class="fixed inset-0 z-50 hidden flex flex-col md:hidden
+    class="fixed inset-0 z-50 hidden flex flex-col md:hidden
             bg-gradient-to-b from-[#1C4E95] via-[#244F9B] to-white">
 
     <!-- HEADER - Glassmorphism -->
@@ -120,12 +127,11 @@
 
         <!-- Back -->
         <button id="detail-back-btn" type="button"
-                class="w-10 h-10 flex items-center justify-center rounded-full bg-white/25 text-white
+            class="w-10 h-10 flex items-center justify-center rounded-full bg-white/25 text-white
                        shadow-sm hover:bg-white/40 hover:scale-105 transition">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" stroke="currentColor"
-                 viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 19l-7-7 7-7" />
+                viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
         </button>
 
@@ -135,26 +141,25 @@
 
         <!-- LOVE di header -->
         <button id="mobile-detail-love-btn" type="button"
-                class="w-10 h-10 flex items-center justify-center rounded-full
+            class="w-10 h-10 flex items-center justify-center rounded-full
                        bg-white/20 text-white backdrop-blur-sm
                        shadow-sm hover:bg-white/30 hover:scale-105 transition">
-            <img id="mobile-detail-love-icon" src="public/icons/love.svg" class="w-5 h-5" alt="Love" />
+            <img id="mobile-detail-love-icon" src="{{ $ICON_LOVE }}" class="w-5 h-5" alt="Love" />
         </button>
     </div>
 
     <!-- COVER ART -->
     <div class="mt-10 flex justify-center">
-        <div class="w-64 h-64 rounded-[2rem] overflow-hidden
+        <div
+            class="w-64 h-64 rounded-[2rem] overflow-hidden
                     shadow-[0_14px_40px_rgba(0,0,0,0.35)] bg-white/5 border border-white/20">
-            <img id="mobile-detail-cover" src="public/images/placeholder.jpg"
-                 class="w-full h-full object-cover" />
+            <img id="mobile-detail-cover" src="{{ $IMG_PLACEHOLDER }}" class="w-full h-full object-cover" />
         </div>
     </div>
 
     <!-- SONG INFO -->
     <div class="text-center mt-8 px-6">
-        <h2 id="mobile-detail-title"
-            class="text-2xl font-semibold text-white drop-shadow-sm">
+        <h2 id="mobile-detail-title" class="text-2xl font-semibold text-white drop-shadow-sm">
             Pilih Lagu
         </h2>
         <p id="mobile-detail-artist" class="text-sm text-blue-100/80 mt-1">
@@ -166,7 +171,7 @@
     <div class="px-8 mt-8">
         <div class="relative">
             <input type="range" id="mobile-detail-progress" value="0" min="0" max="100"
-                   class="w-full h-2 accent-[#F9FAFB] bg-white/25 rounded-full cursor-pointer" />
+                class="w-full h-2 accent-[#F9FAFB] bg-white/25 rounded-full cursor-pointer" />
         </div>
         <div class="flex items-center justify-between text-[11px] text-blue-50 mt-1">
             <span id="mobile-detail-current">0:00</span>
@@ -179,53 +184,53 @@
 
         <!-- Shuffle -->
         <button id="detail-shuffle-btn" type="button"
-                class="w-14 h-14 flex items-center justify-center rounded-full
+            class="w-14 h-14 flex items-center justify-center rounded-full
                        bg-[#1C4E95] text-white border-2 border-white/80
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="public/icons/shuffle.svg" class="w-5 h-5" alt="Shuffle" />
+            <img src="{{ $ICON_SHUFFLE }}" class="w-5 h-5" alt="Shuffle" />
         </button>
 
         <!-- Prev -->
         <button id="mobile-prev-btn" type="button"
-                class="w-14 h-14 flex items-center justify-center rounded-full
+            class="w-14 h-14 flex items-center justify-center rounded-full
                        bg-[#1C4E95] text-white border-2 border-white/80
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="public/icons/prev.svg" class="w-6 h-6" alt="Previous" />
+            <img src="{{ $ICON_PREV }}" class="w-6 h-6" alt="Previous" />
         </button>
 
         <!-- Play / Pause (utama) -->
         <button id="mobile-detail-play-btn" type="button"
-                class="w-20 h-20 flex items-center justify-center rounded-full
+            class="w-20 h-20 flex items-center justify-center rounded-full
                        bg-[#1C4E95] text-white border-2 border-white/80
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img id="mobile-detail-play-icon" src="public/icons/play.svg" class="w-8 h-8" />
-            <img id="mobile-detail-pause-icon" src="public/icons/pause.svg" class="w-8 h-8 hidden" />
+            <img id="mobile-detail-play-icon" src="{{ $ICON_PLAY }}" class="w-8 h-8" />
+            <img id="mobile-detail-pause-icon" src="{{ $ICON_PAUSE }}" class="w-8 h-8 hidden" />
         </button>
 
         <!-- Next -->
         <button id="mobile-next-btn" type="button"
-                class="w-14 h-14 flex items-center justify-center rounded-full
+            class="w-14 h-14 flex items-center justify-center rounded-full
                        bg-[#1C4E95] text-white border-2 border-white/80
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="public/icons/next.svg" class="w-6 h-6" alt="Next" />
+            <img src="{{ $ICON_NEXT }}" class="w-6 h-6" alt="Next" />
         </button>
 
         <!-- Repeat -->
         <button id="detail-repeat-btn" type="button"
-                class="w-14 h-14 flex items-center justify-center rounded-full
+            class="w-14 h-14 flex items-center justify-center rounded-full
                        bg-[#1C4E95] text-white border-2 border-white/80
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="public/icons/repeat.svg" class="w-5 h-5" alt="Repeat" />
+            <img src="{{ $ICON_REPEAT }}" class="w-5 h-5" alt="Repeat" />
         </button>
     </div>
 </div>
@@ -234,8 +239,7 @@
 <audio id="audio-player"></audio>
 
 <!-- 🔹 Modal global: login dulu sebelum pakai fitur favorit -->
-<div id="login-required-modal"
-     class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/40 px-4">
+<div id="login-required-modal" class="fixed inset-0 z-[60] hidden items-center justify-center bg-black/40 px-4">
     <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm sm:max-w-md p-6 sm:p-7 text-center">
         <h2 class="text-lg sm:text-xl font-semibold text-gray-900 mb-1">
             Login dulu, yuk! <span>🎧</span>
@@ -248,14 +252,14 @@
         <div class="flex flex-col sm:flex-row sm:justify-center gap-2.5 sm:gap-3">
             {{-- Tombol utama: Login sekarang --}}
             <a id="login-modal-goto" href="{{ route('login') }}"
-               class="flex-1 px-4 py-2.5 rounded-xl bg-[#1C4E95] text-white text-sm sm:text-[0.9rem]
+                class="flex-1 px-4 py-2.5 rounded-xl bg-[#1C4E95] text-white text-sm sm:text-[0.9rem]
                       font-semibold shadow hover:bg-[#163b70] transition-colors duration-150">
                 Login sekarang
             </a>
 
             {{-- Tombol sekunder: Nanti saja --}}
             <button id="login-modal-cancel"
-                    class="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 bg-white text-gray-700
+                class="flex-1 px-4 py-2.5 rounded-xl border border-gray-300 bg-white text-gray-700
                            text-sm sm:text-[0.9rem] font-medium hover:bg-gray-50 transition-colors duration-150">
                 Nanti saja
             </button>
@@ -264,6 +268,19 @@
 </div>
 
 <script>
+    // === konstanta path icon/gambar dari Blade ===
+    const ICON_LOVE = @json($ICON_LOVE);
+    const ICON_LOVE_FILLED = @json($ICON_LOVE_FILLED);
+    const ICON_REPEAT = @json($ICON_REPEAT);
+    const ICON_PREV = @json($ICON_PREV);
+    const ICON_PLAY = @json($ICON_PLAY);
+    const ICON_PAUSE = @json($ICON_PAUSE);
+    const ICON_NEXT = @json($ICON_NEXT);
+    const ICON_SHUFFLE = @json($ICON_SHUFFLE);
+    const ICON_SOUND_ON = @json($ICON_SOUND_ON);
+    const ICON_SOUND_OFF = @json($ICON_SOUND_OFF);
+    const IMG_PLACEHOLDER = @json($IMG_PLACEHOLDER);
+
     // Util
     const $ = (id) => document.getElementById(id);
 
@@ -287,7 +304,6 @@
 
     function openLoginModal() {
         if (!loginModal) {
-            // fallback kalau modal tidak ketemu
             window.location.href = loginUrl;
             return;
         }
@@ -344,7 +360,6 @@
     const mobileDetailLoveBtn = $("mobile-detail-love-btn");
     const mobileDetailLoveIcon = $("mobile-detail-love-icon");
 
-    // Format waktu mm:ss
     function formatTime(sec) {
         const minutes = Math.floor(sec / 60) || 0;
         const seconds = Math.floor(sec % 60) || 0;
@@ -353,7 +368,7 @@
 
     // Update icon love (desktop, mini, dan header detail)
     function updateLoveIcon() {
-        const loveSrc = isLoved ? "public/icons/love-filled.svg" : "public/icons/love.svg";
+        const loveSrc = isLoved ? ICON_LOVE_FILLED : ICON_LOVE;
 
         if (loveBtn) {
             const img = loveBtn.querySelector("img");
@@ -371,7 +386,6 @@
         }
     }
 
-    // Sync isLoved dari .song-item aktif
     function syncLoveFromCurrentSong() {
         const current = songs[currentSongIndex];
         if (!current) {
@@ -382,38 +396,34 @@
         updateLoveIcon();
     }
 
-    // Toggle Play/Pause
     function togglePlay() {
         if (!audio.src) return;
         if (audio.paused) {
             audio.play();
-            if (playIcon) playIcon.src = "public/icons/pause.svg";
-            if (mobilePlayIcon) mobilePlayIcon.src = "public/icons/pause.svg";
+            if (playIcon) playIcon.src = ICON_PAUSE;
+            if (mobilePlayIcon) mobilePlayIcon.src = ICON_PAUSE;
             if (mobileDetailPlayIcon) mobileDetailPlayIcon.classList.add("hidden");
             if (mobileDetailPauseIcon) mobileDetailPauseIcon.classList.remove("hidden");
         } else {
             audio.pause();
-            if (playIcon) playIcon.src = "public/icons/play.svg";
-            if (mobilePlayIcon) mobilePlayIcon.src = "public/icons/play.svg";
+            if (playIcon) playIcon.src = ICON_PLAY;
+            if (mobilePlayIcon) mobilePlayIcon.src = ICON_PLAY;
             if (mobileDetailPlayIcon) mobileDetailPlayIcon.classList.remove("hidden");
             if (mobileDetailPauseIcon) mobileDetailPauseIcon.classList.add("hidden");
         }
     }
 
-    // Toggle Repeat
     function toggleRepeat() {
         isRepeat = !isRepeat;
         if (repeatBtn) repeatBtn.classList.toggle("bg-white/20", isRepeat);
         if (detailRepeatBtn) detailRepeatBtn.classList.toggle("bg-blue-100", isRepeat);
     }
 
-    // Toggle Shuffle UI
     function toggleShuffleUI(active) {
         shuffleBtn?.classList.toggle("bg-white/20", active);
         detailShuffleBtn?.classList.toggle("bg-blue-100", active);
     }
 
-    // Toggle Love + kirim ke backend LaguFavorit
     function toggleLove() {
         if (!songs || songs.length === 0) {
             alert("Pilih lagu dulu sebelum menandai favorit.");
@@ -448,7 +458,6 @@
             })
             .then(async (res) => {
                 if (res.status === 401) {
-                    // 🔹 Tampilkan popup login
                     openLoginModal();
                     return null;
                 }
@@ -473,14 +482,14 @@
 
                 isLoved = !!data.is_favorite;
 
-                // update attribute DOM
-                current.setAttribute("data-favorite", isLoved ? "1" : "0");
+                const current = songs[currentSongIndex];
+                if (current) {
+                    current.setAttribute("data-favorite", isLoved ? "1" : "0");
+                }
 
-                // update icon
                 updateLoveIcon();
 
-                // Jika di halaman /playlist dan user meng-unlove, hapus baris dari daftar
-                if (!isLoved && isPlaylistPage === "1") {
+                if (!isLoved && isPlaylistPage === "1" && current) {
                     current.remove();
                 }
             })
@@ -490,8 +499,7 @@
             });
     }
 
-    // Load Lagu Baru dan update UI
-    function loadSong(title, artist, src, cover = "public/images/placeholder.jpg", index = 0) {
+    function loadSong(title, artist, src, cover = IMG_PLACEHOLDER, index = 0) {
         if (songTitle) songTitle.textContent = title;
         if (songArtist) songArtist.textContent = artist;
         if (mobileSongTitle) mobileSongTitle.textContent = title;
@@ -500,14 +508,13 @@
         if (mobileDetailArtist) mobileDetailArtist.textContent = artist;
 
         const coverEl = $("mobile-detail-cover");
-        if (coverEl) coverEl.src = cover;
-        if (desktopCover) desktopCover.src = cover;
-        if (mobileMiniCover) mobileMiniCover.src = cover;
+        if (coverEl) coverEl.src = cover || IMG_PLACEHOLDER;
+        if (desktopCover) desktopCover.src = cover || IMG_PLACEHOLDER;
+        if (mobileMiniCover) mobileMiniCover.src = cover || IMG_PLACEHOLDER;
 
         audio.src = src;
         currentSongIndex = index;
 
-        // Tampilkan player hanya setelah ada lagu
         const desktopPlayerEl = $("desktop-player");
         if (desktopPlayerEl) {
             desktopPlayerEl.classList.remove("hidden");
@@ -517,24 +524,20 @@
             mobilePlayer.classList.remove("hidden");
         }
 
-        // sync love state dari item
         syncLoveFromCurrentSong();
 
-        // Play setelah user memilih lagu
         audio.play();
-        if (playIcon) playIcon.src = "public/icons/pause.svg";
-        if (mobilePlayIcon) mobilePlayIcon.src = "public/icons/pause.svg";
+        if (playIcon) playIcon.src = ICON_PAUSE;
+        if (mobilePlayIcon) mobilePlayIcon.src = ICON_PAUSE;
         if (mobileDetailPlayIcon && mobileDetailPauseIcon) {
             mobileDetailPlayIcon.classList.add("hidden");
             mobileDetailPauseIcon.classList.remove("hidden");
         }
 
-        // highlight active song
         songs.forEach(el => el.classList.remove("bg-gray-100"));
         if (songs[index]) songs[index].classList.add("bg-gray-100");
     }
 
-    // Initialize playlist
     function initPlaylist() {
         songs = Array.from(document.querySelectorAll(".song-item"));
         songs.forEach((item, index) => {
@@ -542,14 +545,13 @@
                 const src = item.getAttribute("data-src");
                 const title = item.getAttribute("data-title");
                 const artist = item.getAttribute("data-artist");
-                const cover = item.getAttribute("data-cover") || "public/images/placeholder.jpg";
+                const cover = item.getAttribute("data-cover") || IMG_PLACEHOLDER;
                 if (!src) return;
                 loadSong(title, artist, src, cover, index);
             });
         });
     }
 
-    // Prev / Next
     function playPrev() {
         if (songs.length === 0) return;
         currentSongIndex = (currentSongIndex - 1 + songs.length) % songs.length;
@@ -570,7 +572,6 @@
         songs[currentSongIndex].click();
     }
 
-    // Event bindings
     prevBtn?.addEventListener("click", playPrev);
     nextBtn?.addEventListener("click", playNext);
     $("mobile-prev-btn")?.addEventListener("click", playPrev);
@@ -605,7 +606,6 @@
         toggleShuffleUI(isShuffle);
     });
 
-    // Open/Close detail player
     mobilePlayer?.addEventListener("click", () => {
         mobileDetail?.classList.remove("hidden");
     });
@@ -613,7 +613,6 @@
         mobileDetail?.classList.add("hidden");
     });
 
-    // Modal events
     loginModalCancel?.addEventListener("click", () => {
         closeLoginModal();
     });
@@ -623,7 +622,6 @@
         }
     });
 
-    // Metadata loaded
     audio.addEventListener("loadedmetadata", () => {
         const duration = audio.duration || 0;
         if (progress) progress.max = duration;
@@ -632,7 +630,6 @@
         if (mobileDetailDuration) mobileDetailDuration.textContent = formatTime(duration);
     });
 
-    // Update progress
     audio.addEventListener("timeupdate", () => {
         const current = audio.currentTime || 0;
         if (progress) progress.value = current;
@@ -641,7 +638,6 @@
         if (mobileDetailCurrent) mobileDetailCurrent.textContent = formatTime(current);
     });
 
-    // Seek
     progress?.addEventListener("input", () => {
         audio.currentTime = parseFloat(progress.value);
     });
@@ -649,24 +645,22 @@
         audio.currentTime = parseFloat(mobileDetailProgress.value);
     });
 
-    // Volume & mute
     volumeSlider?.addEventListener("input", () => {
         audio.volume = volumeSlider.value;
-        if (volumeIcon) volumeIcon.src = audio.volume == 0 ? "public/icons/sound-off.svg" : "public/icons/sound-on.svg";
+        if (volumeIcon) volumeIcon.src = audio.volume == 0 ? ICON_SOUND_OFF : ICON_SOUND_ON;
     });
     muteBtn?.addEventListener("click", () => {
         if (audio.volume > 0) {
             audio.volume = 0;
             if (volumeSlider) volumeSlider.value = 0;
-            if (volumeIcon) volumeIcon.src = "public/icons/sound-off.svg";
+            if (volumeIcon) volumeIcon.src = ICON_SOUND_OFF;
         } else {
             audio.volume = 1;
             if (volumeSlider) volumeSlider.value = 1;
-            if (volumeIcon) volumeIcon.src = "public/icons/sound-on.svg";
+            if (volumeIcon) volumeIcon.src = ICON_SOUND_ON;
         }
     });
 
-    // Auto Next
     audio.addEventListener("ended", () => {
         if (isRepeat) {
             songs[currentSongIndex]?.click();
@@ -675,7 +669,6 @@
         }
     });
 
-    // Init tanpa autoplay
     window.addEventListener("DOMContentLoaded", () => {
         initPlaylist();
     });
