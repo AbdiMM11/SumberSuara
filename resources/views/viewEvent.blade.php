@@ -47,7 +47,7 @@
                     {{-- Wrapper flyer --}}
                     <button type="button" onclick="openFlyerModal()"
                         class="inline-block rounded-2xl border border-gray-100 bg-gray-50 shadow-inner p-2 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 focus:ring-offset-white max-w-xs md:max-w-sm">
-                        <img src="{{ $event->flyer ? asset('public/storage/' . $event->flyer) : 'https://picsum.photos/400/600' }}"
+                        <img src="{{ $event->flyer ? asset('storage/' . $event->flyer) : 'https://picsum.photos/400/600' }}"
                             alt="Flyer Event"
                             class="max-h-[420px] md:max-h-[520px] w-auto max-w-full object-contain rounded-xl">
                     </button>
@@ -71,7 +71,7 @@
                 </button>
 
                 {{-- gambar besar --}}
-                <img src="{{ $event->flyer ? asset('public/storage/' . $event->flyer) : 'https://picsum.photos/400/600' }}"
+                <img src="{{ $event->flyer ? asset('/storage/' . $event->flyer) : 'https://picsum.photos/400/600' }}"
                     alt="Flyer Event Fullscreen" class="max-h-[90vh] max-w-[90vw] object-contain rounded-2xl shadow-2xl">
             </div>
 
