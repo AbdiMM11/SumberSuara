@@ -1,5 +1,9 @@
 @extends('layouts.layout')
 
+@php
+    use Illuminate\Support\Str;
+@endphp
+
 @section('content')
     {{-- HEADER --}}
     <div
@@ -21,7 +25,7 @@
                             <img src="{{ $musisi->profil?->logo
                                 ? asset('storage/app/public/' . $musisi->profil->logo)
                                 : asset('public/images/placeholder-logo.png') }}"
-                                 class="w-full h-64 object-cover" alt="Logo">
+                                class="w-full h-64 object-cover" alt="Logo">
                         </div>
 
                         {{-- FOTO UTAMA --}}
@@ -29,14 +33,24 @@
                             <img src="{{ $musisi->profil?->foto
                                 ? asset('storage/app/public/' . $musisi->profil->foto)
                                 : asset('public/images/placeholder-main.jpg') }}"
-                                 class="w-full h-64 object-cover" alt="Foto utama">
+                                class="w-full h-64 object-cover" alt="Foto utama">
                         </div>
 
                         {{-- FOTO GALERI --}}
                         @foreach ($photos ?? [] as $p)
+                            @php
+                                $photoPath = ltrim($p, '/');
+
+                                // kalau sudah mengandung 'storage/app/public' jangan ditambah lagi
+                                if (Str::startsWith($photoPath, 'storage/app/public')) {
+                                    $photoUrl = asset($photoPath);
+                                } else {
+                                    $photoUrl = asset('storage/app/public/' . $photoPath);
+                                }
+                            @endphp
+
                             <div class="swiper-slide">
-                                <img src="{{ asset('storage/app/public/' . $p) }}"
-                                     class="w-full h-64 object-cover" alt="Foto">
+                                <img src="{{ $photoUrl }}" class="w-full h-64 object-cover" alt="Foto">
                             </div>
                         @endforeach
                     </div>
@@ -68,25 +82,22 @@
             <div class="flex items-center justify-center gap-6 mt-4">
 
                 @if ($musisi->spotify)
-                    <a href="https://open.spotify.com/{{ ltrim($musisi->spotify, '@') }}"
-                       target="_blank"
-                       class="w-12 h-12 rounded-full flex items-center justify-center bg-green-500 hover:bg-green-600 shadow-lg transition transform hover:scale-110">
+                    <a href="https://open.spotify.com/{{ ltrim($musisi->spotify, '@') }}" target="_blank"
+                        class="w-12 h-12 rounded-full flex items-center justify-center bg-green-500 hover:bg-green-600 shadow-lg transition transform hover:scale-110">
                         <img src="{{ asset('public/icons/spotify.svg') }}" class="w-6 h-6 invert brightness-0">
                     </a>
                 @endif
 
                 @if ($musisi->instagram)
-                    <a href="https://instagram.com/{{ ltrim($musisi->instagram, '@') }}"
-                       target="_blank"
-                       class="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-tr from-pink-500 to-purple-500 hover:opacity-90 shadow-lg transition transform hover:scale-110">
+                    <a href="https://instagram.com/{{ ltrim($musisi->instagram, '@') }}" target="_blank"
+                        class="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-tr from-pink-500 to-purple-500 hover:opacity-90 shadow-lg transition transform hover:scale-110">
                         <img src="{{ asset('public/icons/instagram.svg') }}" class="w-12 h-12 object-contain">
                     </a>
                 @endif
 
                 @if ($musisi->youtube)
-                    <a href="https://www.youtube.com/@{{ ltrim($musisi->youtube, '@') }}"
-                       target="_blank"
-                       class="w-12 h-12 rounded-full flex items-center justify-center bg-red-600 hover:bg-red-700 shadow-lg transition transform hover:scale-110">
+                    <a href="https://www.youtube.com/@{{ ltrim($musisi - > youtube, '@') }}" target="_blank"
+                        class="w-12 h-12 rounded-full flex items-center justify-center bg-red-600 hover:bg-red-700 shadow-lg transition transform hover:scale-110">
                         <img src="{{ asset('public/icons/youtube.svg') }}" class="w-6 h-6 invert brightness-0">
                     </a>
                 @endif
@@ -119,25 +130,22 @@
         <div class="hidden lg:flex items-center justify-end gap-3 relative z-10 mr-4">
 
             @if ($musisi->spotify)
-                <a href="https://open.spotify.com/{{ ltrim($musisi->spotify, '@') }}"
-                   target="_blank"
-                   class="w-9 h-9 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 shadow-md transition transform hover:scale-110">
+                <a href="https://open.spotify.com/{{ ltrim($musisi->spotify, '@') }}" target="_blank"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 shadow-md transition transform hover:scale-110">
                     <img src="{{ asset('public/icons/spotify.svg') }}" class="w-5 h-5 invert brightness-0">
                 </a>
             @endif
 
             @if ($musisi->instagram)
-                <a href="https://instagram.com/{{ ltrim($musisi->instagram, '@') }}"
-                   target="_blank"
-                   class="w-9 h-9 flex items-center justify-center rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 hover:opacity-90 shadow-md transition transform hover:scale-110">
+                <a href="https://instagram.com/{{ ltrim($musisi->instagram, '@') }}" target="_blank"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 hover:opacity-90 shadow-md transition transform hover:scale-110">
                     <img src="{{ asset('public/icons/instagram.svg') }}" class="w-9 h-9 object-contain">
                 </a>
             @endif
 
             @if ($musisi->youtube)
-                <a href="https://www.youtube.com/@{{ ltrim($musisi->youtube, '@') }}"
-                   target="_blank"
-                   class="w-9 h-9 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 shadow-md transition transform hover:scale-110">
+                <a href="https://www.youtube.com/@{{ ltrim($musisi - > youtube, '@') }}" target="_blank"
+                    class="w-9 h-9 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 shadow-md transition transform hover:scale-110">
                     <img src="{{ asset('public/icons/youtube.svg') }}" class="w-5 h-5 invert brightness-0">
                 </a>
             @endif
@@ -152,10 +160,11 @@
                 <img src="{{ $musisi->profil?->foto
                     ? asset('storage/app/public/' . $musisi->profil->foto)
                     : asset('public/images/placeholder-main.jpg') }}"
-                     class="w-full h-[500px] object-cover rounded-2xl shadow-2xl">
+                    class="w-full h-[500px] object-cover rounded-2xl shadow-2xl">
 
                 @if ($musisi->profil?->desk_musisi)
-                    <div class="absolute -bottom-16 left-12 right-12 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white p-6 shadow-lg text-center">
+                    <div
+                        class="absolute -bottom-16 left-12 right-12 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white p-6 shadow-lg text-center">
                         <p class="text-sm md:text-base">{{ $musisi->profil->desk_musisi }}</p>
                     </div>
                 @endif
@@ -163,8 +172,18 @@
 
             <div class="lg:col-span-3 hidden lg:grid grid-rows-3 gap-4 h-[500px]">
                 @forelse($photos ?? [] as $thumb)
-                    <img src="{{ asset('storage/app/public/' . $thumb) }}"
-                         class="w-full h-full object-cover rounded-xl shadow-lg hover:scale-[1.03] transition">
+                    @php
+                        $thumbPath = ltrim($thumb, '/');
+
+                        if (Str::startsWith($thumbPath, 'storage/app/public')) {
+                            $thumbUrl = asset($thumbPath);
+                        } else {
+                            $thumbUrl = asset('storage/app/public/' . $thumbPath);
+                        }
+                    @endphp
+
+                    <img src="{{ $thumbUrl }}"
+                        class="w-full h-full object-cover rounded-xl shadow-lg hover:scale-[1.03] transition">
                 @empty
                     <div class="rounded-xl bg-gray-100 grid place-content-center text-gray-400">No photos</div>
                 @endforelse
@@ -180,11 +199,8 @@
 
         <div id="playlist" class="space-y-1.5 max-h-96 overflow-y-auto">
             @forelse($songs ?? [] as $i => $song)
-
                 @php
-                    $audioUrl = $song->file_mp3
-                        ? asset('storage/app/public/' . $song->file_mp3)
-                        : '';
+                    $audioUrl = $song->file_mp3 ? asset('storage/app/public/' . $song->file_mp3) : '';
 
                     $coverUrl = $song->musisi?->profil?->logo
                         ? asset('storage/app/public/' . $song->musisi->profil->logo)
@@ -192,13 +208,10 @@
                 @endphp
 
                 <div class="song-item group flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer"
-                     data-karya-id="{{ $song->id_karya }}"
-                     data-src="{{ $audioUrl }}"
-                     data-title="{{ $song->judul }}"
-                     data-artist="{{ $musisi->display_name }}"
-                     data-cover="{{ $coverUrl }}"
-                     data-duration="{{ $song->durasi_format ?? '' }}"
-                     data-favorite="{{ in_array($song->id_karya, $favoriteIds ?? []) ? 1 : 0 }}">
+                    data-karya-id="{{ $song->id_karya }}" data-src="{{ $audioUrl }}" data-title="{{ $song->judul }}"
+                    data-artist="{{ $musisi->display_name }}" data-cover="{{ $coverUrl }}"
+                    data-duration="{{ $song->durasi_format ?? '' }}"
+                    data-favorite="{{ in_array($song->id_karya, $favoriteIds ?? []) ? 1 : 0 }}">
 
                     <span class="hidden md:block w-8 text-center text-sm text-gray-500">{{ $i + 1 }}</span>
 
@@ -206,7 +219,8 @@
                         <div class="w-12 h-12 rounded-lg overflow-hidden bg-gray-200">
                             <img src="{{ $coverUrl }}" class="w-12 h-12 object-cover">
                         </div>
-                        <span class="md:hidden absolute -top-1 -left-1 text-[10px] px-1.5 py-0.5 bg-white/90 rounded shadow">
+                        <span
+                            class="md:hidden absolute -top-1 -left-1 text-[10px] px-1.5 py-0.5 bg-white/90 rounded shadow">
                             {{ $i + 1 }}
                         </span>
                     </div>
@@ -239,8 +253,14 @@
         document.addEventListener('DOMContentLoaded', () => {
             new Swiper('.band-slider', {
                 loop: true,
-                pagination: { el: '.swiper-pagination', clickable: true },
-                autoplay: { delay: 3500, disableOnInteraction: false }
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true
+                },
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false
+                }
             });
         });
     </script>
