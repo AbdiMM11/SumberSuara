@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\HeroSection;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class HeroSectionController extends Controller
 {
     public function index()
     {
         $hero = HeroSection::first();
+
         return view('admin.heroSection', compact('hero'));
     }
 
@@ -21,59 +22,60 @@ class HeroSectionController extends Controller
 
         // Validasi
         $rules = [
-            'gambar'    => [$hero ? 'sometimes' : 'required', 'file','image','max:3072'],
-            'deskripsi' => ['sometimes','nullable','string','max:1000'],
-            'hero1'     => ['sometimes','file','image','max:3072'],
-            'hero2'     => ['sometimes','file','image','max:3072'],
-            'hero3'     => ['sometimes','file','image','max:3072'],
+            'gambar'    => [$hero ? 'sometimes' : 'required', 'file', 'image', 'max:3072'],
+            'deskripsi' => ['sometimes', 'nullable', 'string', 'max:1000'],
+            'hero1'     => ['sometimes', 'file', 'image', 'max:3072'],
+            'hero2'     => ['sometimes', 'file', 'image', 'max:3072'],
+            'hero3'     => ['sometimes', 'file', 'image', 'max:3072'],
         ];
+
         $request->validate($rules);
 
-        if (!$hero) $hero = new HeroSection();
-
-        // Pastikan folder public/hero ada
-        if (!is_dir(public_path('hero'))) {
-            @mkdir(public_path('hero'), 0755, true);
+        if (!$hero) {
+            $hero = new HeroSection();
         }
 
-        // Helper hapus file lama
-        $removeIfExists = function (?string $relPath) {
-            if ($relPath) {
-                $full = public_path($relPath);
-                if (is_file($full)) @unlink($full);
+        // Helper: hapus file lama di disk public
+        $removeIfExists = function (?string $path) {
+            if ($path && Storage::disk('public')->exists($path)) {
+                Storage::disk('public')->delete($path);
             }
         };
 
-        // Helper simpan file ke public/hero → return "hero/filename.ext"
-        $saveToPublicHero = function (string $inputName): ?string {
-            $file = request()->file($inputName);
-            if (!$file) return null;
-            $ext  = $file->getClientOriginalExtension();
-            $name = Str::uuid()->toString().'.'.$ext; // nama unik
-            $file->move(public_path('hero'), $name);
-            return 'hero/'.$name;
+        // Helper: simpan file ke disk "public" → storage/app/public/hero/xxx.ext
+        $saveToPublicHero = function (string $inputName) use ($request): ?string {
+            if (!$request->hasFile($inputName)) {
+                return null;
+            }
+
+            // hasil: "hero/namafile.ext"
+            return $request->file($inputName)->store('hero', 'public');
         };
 
-        // Banner (utama)
+        // Banner utama
         if ($request->hasFile('gambar')) {
             $removeIfExists($hero->banner);
-            $hero->banner = $saveToPublicHero('gambar');
+            $hero->banner = $saveToPublicHero('gambar');  // contoh: hero/banner-uuid.jpg
         }
 
-        // Deskripsi (opsional)
+        // Deskripsi / tagline
         if ($request->filled('deskripsi')) {
             $hero->desk = $request->input('deskripsi');
         }
 
-        // Sekunder 1..3
+        // Hero sekunder 1
         if ($request->hasFile('hero1')) {
             $removeIfExists($hero->sec1);
             $hero->sec1 = $saveToPublicHero('hero1');
         }
+
+        // Hero sekunder 2
         if ($request->hasFile('hero2')) {
             $removeIfExists($hero->sec2);
             $hero->sec2 = $saveToPublicHero('hero2');
         }
+
+        // Hero sekunder 3
         if ($request->hasFile('hero3')) {
             $removeIfExists($hero->sec3);
             $hero->sec3 = $saveToPublicHero('hero3');

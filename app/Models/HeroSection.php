@@ -8,12 +8,52 @@ class HeroSection extends Model
 {
     protected $table = 'hero_sections';
     protected $primaryKey = 'id_heroSec';
-    protected $fillable = ['banner','desk','sec1','sec2','sec3','is_active'];
-    protected $casts = ['is_active' => 'boolean'];
 
-    // Accessors: path relatif di DB → URL publik
-    public function getBannerUrlAttribute(): ?string  { return $this->banner ? asset($this->banner) : null; }
-    public function getSec1UrlAttribute(): ?string     { return $this->sec1 ? asset($this->sec1) : null; }
-    public function getSec2UrlAttribute(): ?string     { return $this->sec2 ? asset($this->sec2) : null; }
-    public function getSec3UrlAttribute(): ?string     { return $this->sec3 ? asset($this->sec3) : null; }
+    protected $fillable = [
+        'banner',
+        'desk',
+        'sec1',
+        'sec2',
+        'sec3',
+        'is_active',
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean',
+    ];
+
+    /**
+     * Helper untuk membentuk URL publik.
+     * Di DB kita simpan "hero/xxxx.jpg" (relatif ke storage/app/public).
+     * Di browser diakses via "storage/app/public/hero/xxxx.jpg".
+     */
+    protected function buildUrl(?string $path): ?string
+    {
+        if (!$path) {
+            return null;
+        }
+
+        // Sesuaikan dengan pola yang sudah dipakai logo/foto musisi
+        return asset('storage/app/public/' . ltrim($path, '/'));
+    }
+
+    public function getBannerUrlAttribute(): ?string
+    {
+        return $this->buildUrl($this->banner);
+    }
+
+    public function getSec1UrlAttribute(): ?string
+    {
+        return $this->buildUrl($this->sec1);
+    }
+
+    public function getSec2UrlAttribute(): ?string
+    {
+        return $this->buildUrl($this->sec2);
+    }
+
+    public function getSec3UrlAttribute(): ?string
+    {
+        return $this->buildUrl($this->sec3);
+    }
 }

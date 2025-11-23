@@ -2,7 +2,7 @@
 
 @php
     /** @var \App\Models\HeroSection|null $hero */
-    $hero = \App\Models\HeroSection::first();
+    $hero = \App\Models\HeroSection::where('is_active', true)->first();
 
     $genreOptions = ['Pop', 'Rock', 'Jazz', 'Blues', 'Metal', 'Reggae / SKA', 'Hip Hop', 'Other'];
     $domOptions = [
@@ -33,70 +33,62 @@
             <div class="lg:col-span-8 relative">
 
                 {{-- MOBILE: Swiper --}}
-                @if ($hero)
-                    <div class="lg:hidden">
-                        <div class="swiper">
-                            <div class="swiper-wrapper">
-
-                                {{-- Slide Hero Utama --}}
-                                @if ($hero->banner_url)
-                                    <div class="swiper-slide relative">
-                                        <img src="{{ $hero->banner_url }}" alt="Hero Utama"
-                                             class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
-                                        <div
-                                            class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-lg">
-                                        </div>
-                                        @if ($hero->desk)
-                                            <div
-                                                class="absolute bottom-5 left-4 right-4 text-white p-3 text-center text-xs sm:text-sm">
-                                                <h2 class="text-sm sm:text-lg font-semibold mb-1 sm:mb-2">
-                                                    {{ $hero->title ?? 'Sumber Suara' }}
-                                                </h2>
-                                                <p class="text-[11px] sm:text-xs">{{ $hero->desk }}</p>
-                                            </div>
+                <div class="lg:hidden">
+                    <div class="swiper">
+                        <div class="swiper-wrapper">
+                            @if (!empty($hero?->banner_url))
+                                <div class="swiper-slide relative">
+                                    <img src="{{ $hero->banner_url }}" alt="Hero Utama"
+                                         class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
+                                    <div
+                                        class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent rounded-lg">
+                                    </div>
+                                    <div
+                                        class="absolute bottom-5 left-4 right-4 text-white p-3 text-center text-xs sm:text-sm">
+                                        <h2 class="text-sm sm:text-lg font-semibold mb-1 sm:mb-2">
+                                            {{ $hero->title ?? 'Sumber Suara' }}
+                                        </h2>
+                                        @if (!empty($hero?->desk))
+                                            <p class="text-[11px] sm:text-xs">{{ $hero->desk }}</p>
                                         @endif
                                     </div>
-                                @endif
+                                </div>
+                            @endif
 
-                                {{-- Slide Sekunder 1 --}}
-                                @if ($hero->sec1_url)
-                                    <div class="swiper-slide relative">
-                                        <img src="{{ $hero->sec1_url }}" alt="Hero Sekunder 1"
-                                             class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
-                                        <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
-                                    </div>
-                                @endif
+                            @if (!empty($hero?->sec1_url))
+                                <div class="swiper-slide relative">
+                                    <img src="{{ $hero->sec1_url }}" alt="Hero Sekunder 1"
+                                         class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
+                                    <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
+                                </div>
+                            @endif
 
-                                {{-- Slide Sekunder 2 --}}
-                                @if ($hero->sec2_url)
-                                    <div class="swiper-slide relative">
-                                        <img src="{{ $hero->sec2_url }}" alt="Hero Sekunder 2"
-                                             class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
-                                        <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
-                                    </div>
-                                @endif
+                            @if (!empty($hero?->sec2_url))
+                                <div class="swiper-slide relative">
+                                    <img src="{{ $hero->sec2_url }}" alt="Hero Sekunder 2"
+                                         class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
+                                    <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
+                                </div>
+                            @endif
 
-                                {{-- Slide Sekunder 3 --}}
-                                @if ($hero->sec3_url)
-                                    <div class="swiper-slide relative">
-                                        <img src="{{ $hero->sec3_url }}" alt="Hero Sekunder 3"
-                                             class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
-                                        <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
-                                    </div>
-                                @endif
-                            </div>
-
-                            <div class="swiper-pagination"></div>
+                            @if (!empty($hero?->sec3_url))
+                                <div class="swiper-slide relative">
+                                    <img src="{{ $hero->sec3_url }}" alt="Hero Sekunder 3"
+                                         class="w-full h-[380px] sm:h-[420px] object-cover rounded-lg">
+                                    <div class="absolute inset-0 bg-black/30 rounded-lg"></div>
+                                </div>
+                            @endif
                         </div>
+                        <div class="swiper-pagination"></div>
                     </div>
-                @endif
+                </div>
 
                 {{-- DESKTOP: Hero --}}
-                @if ($hero && $hero->banner_url)
+                @if (!empty($hero?->banner_url))
                     <div class="hidden lg:block relative">
                         <img src="{{ $hero->banner_url }}" alt="Hero Utama"
                              class="w-full h-96 lg:h-[500px] object-cover">
-                        @if ($hero->desk)
+                        @if (!empty($hero?->desk))
                             <div
                                 class="absolute -bottom-16 left-12 right-12 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white p-5 shadow-lg text-center rounded-lg">
                                 <p class="text-sm md:text-base leading-relaxed font-normal">{{ $hero->desk }}</p>
@@ -167,10 +159,12 @@
                     <div id="playlist" class="space-y-2 max-h-80 sm:max-h-96 overflow-y-auto pr-1">
                         @forelse ($songs as $i => $song)
                             @php
+                                // file_mp3 disimpan lewat ->store('karya/audio', 'public')
                                 $audioUrl = $song->file_mp3
                                     ? asset('storage/app/public/' . $song->file_mp3)
                                     : '';
 
+                                // logo musisi (fallback placeholder)
                                 $logoPath = $song->musisi?->profil?->logo;
                                 $coverUrl = $logoPath
                                     ? asset('storage/app/public/' . $logoPath)
@@ -218,22 +212,22 @@
             </div>
         </div>
 
-        {{-- HERO tambahan (desktop: grid sekunder) --}}
-        @if ($hero && ($hero->sec1_url || $hero->sec2_url || $hero->sec3_url))
+        {{-- HERO tambahan (desktop) --}}
+        @if (!empty($hero?->sec1_url) || !empty($hero?->sec2_url) || !empty($hero?->sec3_url))
             <div class="hidden md:grid grid-cols-3 gap-4 mt-24">
-                @if ($hero->sec1_url)
+                @if (!empty($hero?->sec1_url))
                     <div class="aspect-[4/3]">
                         <img src="{{ $hero->sec1_url }}" alt="Hero Sekunder 1"
                              class="w-full h-56 object-cover rounded-lg">
                     </div>
                 @endif
-                @if ($hero->sec2_url)
+                @if (!empty($hero?->sec2_url))
                     <div class="aspect-[4/3]">
                         <img src="{{ $hero->sec2_url }}" alt="Hero Sekunder 2"
                              class="w-full h-56 object-cover rounded-lg">
                     </div>
                 @endif
-                @if ($hero->sec3_url)
+                @if (!empty($hero?->sec3_url))
                     <div class="aspect-[4/3]">
                         <img src="{{ $hero->sec3_url }}" alt="Hero Sekunder 3"
                              class="w-full h-56 object-cover rounded-lg">
@@ -271,7 +265,7 @@
                     </div>
                 </div>
 
-                {{-- Genre --}}
+                {{-- Genre (1 kolom) --}}
                 <div class="relative col-span-1">
                     <select name="genre" onchange="this.form.submit()"
                             class="w-full px-2 py-1.5 sm:px-3 sm:py-2 border border-transparent rounded-full
@@ -286,7 +280,7 @@
                     </select>
                 </div>
 
-                {{-- Domisili --}}
+                {{-- Domisili (1 kolom) --}}
                 <div class="relative col-span-1">
                     <select name="domisili" onchange="this.form.submit()"
                             class="w-full px-2 py-1.5 sm:px-3 sm:py-2 border border-transparent rounded-full
