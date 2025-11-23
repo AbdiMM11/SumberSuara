@@ -56,7 +56,7 @@
                                 {{-- Judul + Cover --}}
                                 <td class="py-3 px-4">
                                     <div class="flex items-center gap-3">
-                                        <img src="{{ url('storage/app/public/' . $karya->cover_path) }}" alt="cover"
+                                        <img src="{{ url('storage/app/public/' . $musisiLogo) }}" alt="cover"
                                             class="w-10 h-10 object-cover rounded-lg bg-gray-200">
                                         <div>
                                             <p class="font-medium text-gray-800">{{ $karya->judul }}</p>
