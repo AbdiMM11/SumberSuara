@@ -56,7 +56,7 @@ class Karya extends Model
     public function favoredByUsers()
     {
         return $this->belongsToMany(User::class, 'lagu_favorit', 'karya_id', 'user_id')
-                    ->withTimestamps();
+            ->withTimestamps();
     }
 
     /* ========== Accessors ========== */
@@ -71,12 +71,23 @@ class Karya extends Model
     // coverUrl mengambil dari logo profil musisi / placeholder
     public function getCoverUrlAttribute(): string
     {
-        $logo = $this->musisi?->profil?->logo;
+        // 1. Pakai cover khusus karya jika ada
+        if (!empty($this->cover_path)) {
+            return asset('storage/app/public/' . ltrim($this->cover_path, '/'));
+        }
 
-        return $logo
-            ? asset('storage/' . ltrim($logo, '/'))
-            : asset('images/placeholder-logo.png');
+        // 2. Kalau tidak ada, pakai logo profil musisi
+        $logoPath = $this->musisi?->profil?->logo;
+
+        if (!empty($logoPath)) {
+            // SESUAI pola yang sudah dipakai di sidebar musisi
+            return asset('storage/app/public/' . ltrim($logoPath, '/'));
+        }
+
+        // 3. Fallback: placeholder
+        return asset('public/images/song-placeholder.png');
     }
+
 
     public function getDurasiFormatAttribute(): ?string
     {
@@ -103,7 +114,7 @@ class Karya extends Model
 
         return $q->where(function ($qq) use ($term) {
             $qq->where('judul', 'like', "%{$term}%")
-               ->orWhere('tahun', 'like', "%{$term}%");
+                ->orWhere('tahun', 'like', "%{$term}%");
         });
     }
 }
