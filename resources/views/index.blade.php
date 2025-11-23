@@ -225,7 +225,7 @@
             style="background-color: #1C4E95 ;">
 
             <div class="flex-shrink-0 flex justify-center sm:justify-end w-full sm:w-auto">
-                <img src="{{ asset('images/OurMusicians.png') }}" alt="Logo Komunitas"
+                <img src="{{ asset('public/images/OurMusicians.png') }}" alt="Logo Komunitas"
                     class="w-auto max-w-[70%] sm:max-w-none mx-auto sm:h-40 object-contain">
             </div>
 
@@ -292,7 +292,7 @@
                             @php
                                 $logo = $m->profil?->logo
                                     ? asset('storage/' . $m->profil->logo)
-                                    : asset('images/placeholder-band.jpg');
+                                    : asset('public/images/placeholder-band.jpg');
                             @endphp
                             <img src="{{ $logo }}" alt="Logo {{ $m->display_name }}"
                                 class="w-full h-full object-cover">
