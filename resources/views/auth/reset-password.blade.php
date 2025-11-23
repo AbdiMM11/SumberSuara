@@ -1,39 +1,106 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+@extends('layouts.layout')
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+@section('content')
+<div
+    class="flex items-center justify-center min-h-screen bg-gradient-to-br from-blue-100 via-gray-100 to-blue-200 py-6 px-4">
+    <div
+        class="max-w-6xl w-full bg-white rounded-2xl shadow-lg overflow-hidden
+               grid grid-cols-1 md:grid-cols-2 transition-all duration-500
+               min-h-[520px] md:min-h-[560px]">
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        {{-- BAGIAN GAMBAR --}}
+        <div class="relative hidden md:block">
+            <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?ixlib=rb-4.0.3&auto=format&fit=crop&w=1400&q=80"
+                 alt="Concert" class="w-full h-full object-cover">
+            <div
+                class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-center items-center text-center text-white px-8">
+                <h2 class="text-3xl font-bold mb-3">Buat Password Baru</h2>
+                <p class="text-sm max-w-sm">
+                    Masukkan password baru yang kuat untuk menjaga keamanan akunmu.
+                </p>
+            </div>
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        {{-- BAGIAN FORM --}}
+        <div class="p-10 md:p-12 flex flex-col justify-center">
+
+            {{-- Logo / Judul --}}
+            <div class="mb-4 text-center">
+                <h1 class="text-3xl font-bold text-[#1C4E95]">Sumber Suara</h1>
+                <p class="text-gray-600 mt-2 text-sm">Atur ulang password akunmu</p>
+            </div>
+
+            {{-- ERROR VALIDATION --}}
+            @if ($errors->any())
+                <div class="mb-4 p-3 rounded-lg bg-red-50 text-red-700 text-xs">
+                    <ul class="list-disc list-inside space-y-1">
+                        @foreach ($errors->all() as $e)
+                            <li>{{ $e }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            {{-- FORM RESET PASSWORD --}}
+            <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
+                @csrf
+
+                {{-- token reset dari URL --}}
+                <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+                {{-- Email --}}
+                <div>
+                    <label for="email" class="block text-xs font-semibold text-gray-700 mb-1">
+                        Email
+                    </label>
+                    <input id="email" name="email" type="email"
+                           value="{{ old('email', $request->email) }}"
+                           class="w-full px-5 py-3 border border-gray-300 rounded-lg
+                                  focus:outline-none focus:ring-2 focus:ring-[#1C4E95] focus:border-[#1C4E95]
+                                  placeholder:text-gray-400 transition"
+                           required autofocus>
+                </div>
+
+                {{-- Password baru --}}
+                <div>
+                    <label for="password" class="block text-xs font-semibold text-gray-700 mb-1">
+                        Password Baru
+                    </label>
+                    <input id="password" name="password" type="password" placeholder="Password baru"
+                           class="w-full px-5 py-3 border border-gray-300 rounded-lg
+                                  focus:outline-none focus:ring-2 focus:ring-[#1C4E95] focus:border-[#1C4E95]
+                                  placeholder:text-gray-400 transition"
+                           required>
+                </div>
+
+                {{-- Konfirmasi password baru --}}
+                <div>
+                    <label for="password_confirmation" class="block text-xs font-semibold text-gray-700 mb-1">
+                        Konfirmasi Password Baru
+                    </label>
+                    <input id="password_confirmation" name="password_confirmation" type="password"
+                           placeholder="Ulangi password baru"
+                           class="w-full px-5 py-3 border border-gray-300 rounded-lg
+                                  focus:outline-none focus:ring-2 focus:ring-[#1C4E95] focus:border-[#1C4E95]
+                                  placeholder:text-gray-400 transition"
+                           required>
+                </div>
+
+                <button type="submit"
+                        class="w-full py-3 bg-[#1C4E95] text-white rounded-lg font-semibold
+                               hover:bg-blue-900 transition transform hover:scale-[1.02] active:scale-95
+                               shadow-md hover:shadow-lg">
+                    Simpan Password Baru
+                </button>
+            </form>
+
+            <p class="mt-6 text-center text-xs text-gray-600">
+                Sudah ingat password?
+                <a href="{{ route('login') }}" class="text-[#1C4E95] font-semibold hover:underline">
+                    Kembali ke Login
+                </a>
+            </p>
         </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

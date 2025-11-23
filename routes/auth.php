@@ -12,16 +12,31 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
+    // /register → kita redirect ke register audiens
     Route::get('register', [RegisteredUserController::class, 'create'])
         ->name('register');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    // REGISTER AUDIENS
+    Route::get('register/audience', [RegisteredUserController::class, 'createAudience'])
+        ->name('register.audience');
 
+    Route::post('register/audience', [RegisteredUserController::class, 'storeAudience'])
+        ->name('register.audience.store');
+
+    // REGISTER MUSISI
+    Route::get('register/musisi', [RegisteredUserController::class, 'createMusisi'])
+        ->name('register.musisi');
+
+    Route::post('register/musisi', [RegisteredUserController::class, 'storeMusisi'])
+        ->name('register.musisi.store');
+
+    // LOGIN
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
+    // LUPA PASSWORD
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
 
@@ -52,7 +67,8 @@ Route::middleware('auth')->group(function () {
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::put('password', [PasswordController::class, 'update'])->name('password.update');
+    Route::put('password', [PasswordController::class, 'update'])
+        ->name('password.update');
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
