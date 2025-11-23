@@ -14,11 +14,11 @@
                 <div class="swiper band-slider rounded-xl overflow-hidden">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="{{ $musisi->profil?->logo ? asset('storage/' . $musisi->profil->logo) : asset('images/placeholder-logo.png') }}"
+                            <img src="{{ $musisi->profil?->logo ? asset('storage/' . $musisi->profil->logo) : asset('public/images/placeholder-logo.png') }}"
                                  class="w-full h-64 object-cover" alt="Logo">
                         </div>
                         <div class="swiper-slide">
-                            <img src="{{ $musisi->profil?->foto ? asset('storage/' . $musisi->profil->foto) : asset('images/placeholder-main.jpg') }}"
+                            <img src="{{ $musisi->profil?->foto ? asset('storage/' . $musisi->profil->foto) : asset('public/images/placeholder-main.jpg') }}"
                                  class="w-full h-64 object-cover" alt="Foto utama">
                         </div>
                         @foreach ($photos ?? [] as $p)
@@ -54,7 +54,7 @@
                        target="_blank" rel="noopener"
                        class="w-12 h-12 rounded-full flex items-center justify-center bg-green-500 shadow-lg hover:bg-green-600 transition transform hover:scale-110"
                        aria-label="Spotify">
-                        <img src="{{ asset('icons/spotify.svg') }}" class="w-6 h-6 invert brightness-0" alt="">
+                        <img src="{{ asset('public/icons/spotify.svg') }}" class="w-6 h-6 invert brightness-0" alt="">
                     </a>
                 @endif
 
@@ -63,7 +63,7 @@
                        target="_blank" rel="noopener"
                        class="w-12 h-12 rounded-full flex items-center justify-center bg-gradient-to-tr from-pink-500 to-purple-500 shadow-lg hover:opacity-90 transition transform hover:scale-110"
                        aria-label="Instagram">
-                        <img src="{{ asset('icons/instagram.svg') }}" class="w-12 h-12 object-contain" alt="">
+                        <img src="{{ asset('public/icons/instagram.svg') }}" class="w-12 h-12 object-contain" alt="">
                     </a>
                 @endif
 
@@ -72,7 +72,7 @@
                        target="_blank" rel="noopener"
                        class="w-12 h-12 rounded-full flex items-center justify-center bg-red-600 shadow-lg hover:bg-red-700 transition transform hover:scale-110"
                        aria-label="YouTube">
-                        <img src="{{ asset('icons/youtube.svg') }}" class="w-6 h-6 invert brightness-0" alt="">
+                        <img src="{{ asset('public/icons/youtube.svg') }}" class="w-6 h-6 invert brightness-0" alt="">
                     </a>
                 @endif
             </div>
@@ -81,7 +81,7 @@
         {{-- DESKTOP HEADER --}}
         <div class="hidden lg:flex items-center gap-4 relative z-10 ml-4">
             <div class="w-16 h-16 rounded-full overflow-hidden shadow-lg ring-4 ring-white/30">
-                <img src="{{ $musisi->profil?->logo ? asset('storage/' . $musisi->profil->logo) : asset('images/placeholder-logo.png') }}"
+                <img src="{{ $musisi->profil?->logo ? asset('storage/' . $musisi->profil->logo) : asset('public/images/placeholder-logo.png') }}"
                      class="w-full h-full object-cover" alt="Logo">
             </div>
             <div>
@@ -103,7 +103,7 @@
                    target="_blank" rel="noopener"
                    class="w-9 h-9 flex items-center justify-center rounded-full bg-green-500 hover:bg-green-600 shadow-md transition transform hover:scale-110"
                    aria-label="Spotify">
-                    <img src="{{ asset('icons/spotify.svg') }}" class="w-5 h-5 invert brightness-0" alt="">
+                    <img src="{{ asset('public/icons/spotify.svg') }}" class="w-5 h-5 invert brightness-0" alt="">
                 </a>
             @endif
 
@@ -112,7 +112,7 @@
                    target="_blank" rel="noopener"
                    class="w-9 h-9 flex items-center justify-center rounded-full bg-gradient-to-tr from-pink-500 to-purple-500 hover:opacity-90 shadow-md transition transform hover:scale-110"
                    aria-label="Instagram">
-                    <img src="{{ asset('icons/instagram.svg') }}" class="w-9 h-9 object-contain" alt="">
+                    <img src="{{ asset('public/icons/instagram.svg') }}" class="w-9 h-9 object-contain" alt="">
                 </a>
             @endif
 
@@ -121,7 +121,7 @@
                    target="_blank" rel="noopener"
                    class="w-9 h-9 flex items-center justify-center rounded-full bg-red-600 hover:bg-red-700 shadow-md transition transform hover:scale-110"
                    aria-label="YouTube">
-                    <img src="{{ asset('icons/youtube.svg') }}" class="w-5 h-5 invert brightness-0" alt="">
+                    <img src="{{ asset('public/icons/youtube.svg') }}" class="w-5 h-5 invert brightness-0" alt="">
                 </a>
             @endif
         </div>
@@ -131,7 +131,7 @@
     <div class="container mx-auto px-4 lg:px-8 py-10 -mt-24 lg:-mt-0">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div class="lg:col-span-9 relative hidden lg:block">
-                <img src="{{ $musisi->profil?->foto ? asset('storage/' . $musisi->profil->foto) : asset('images/placeholder-main.jpg') }}"
+                <img src="{{ $musisi->profil?->foto ? asset('storage/' . $musisi->profil->foto) : asset('public/images/placeholder-main.jpg') }}"
                      alt="Concert" class="w-full h-[500px] object-cover rounded-2xl shadow-2xl">
                 @if (!empty($musisi->profil?->desk_musisi))
                     <div class="absolute -bottom-16 left-12 right-12 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white p-6 shadow-lg text-center">

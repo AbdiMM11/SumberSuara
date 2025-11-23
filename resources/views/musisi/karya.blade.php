@@ -62,7 +62,7 @@
                                         <a href="{{ route('musisi.karya.edit', $karya->id_karya) }}"
                                            class="p-2 rounded-lg bg-gray-50 hover:bg-blue-100 text-gray-600 hover:text-blue-600 transition"
                                            title="Edit">
-                                            <img src="{{ asset('icons/edit.svg') }}" alt="Edit" class="w-5 h-5">
+                                            <img src="{{ asset('public/icons/edit.svg') }}" alt="Edit" class="w-5 h-5">
                                         </a>
 
                                         {{-- Tombol Hapus pakai popup --}}
@@ -71,7 +71,7 @@
                                                 data-delete-url="{{ route('musisi.karya.destroy', $karya->id_karya) }}"
                                                 class="p-2 rounded-lg bg-gray-50 hover:bg-red-100 text-gray-600 hover:text-red-600 transition"
                                                 title="Hapus">
-                                            <img src="{{ asset('icons/delete.svg') }}" alt="Hapus" class="w-5 h-5">
+                                            <img src="{{ asset('public/icons/delete.svg') }}" alt="Hapus" class="w-5 h-5">
                                         </button>
                                     </div>
                                 </td>

@@ -10,7 +10,7 @@
         <!-- Info Lagu dengan cover -->
         <div class="flex items-center gap-3 min-w-0 overflow-hidden">
             <div class="w-11 h-11 rounded-xl overflow-hidden bg-white/10 border border-white/20">
-                <img id="desktop-cover" src="/images/placeholder.jpg"
+                <img id="desktop-cover" src="public/images/placeholder.jpg"
                      class="w-full h-full object-cover"
                      alt="Cover" />
             </div>
@@ -30,27 +30,27 @@
             <div class="flex items-center gap-4 md:gap-6">
                 <button id="love-btn" type="button"
                         class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="/icons/love.svg" class="w-4 h-4" alt="Love" />
+                    <img src="public/icons/love.svg" class="w-4 h-4" alt="Love" />
                 </button>
                 <button id="repeat-btn" type="button"
                         class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="/icons/repeat.svg" class="w-4 h-4" alt="Repeat" />
+                    <img src="public/icons/repeat.svg" class="w-4 h-4" alt="Repeat" />
                 </button>
                 <button id="prev-btn" type="button"
                         class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="/icons/prev.svg" class="w-4 h-4" alt="Previous" />
+                    <img src="public/icons/prev.svg" class="w-4 h-4" alt="Previous" />
                 </button>
                 <button id="play-btn" type="button"
                         class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img id="play-icon" src="/icons/play.svg" class="w-6 h-6" alt="Play" />
+                    <img id="play-icon" src="public/icons/play.svg" class="w-6 h-6" alt="Play" />
                 </button>
                 <button id="next-btn" type="button"
                         class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="/icons/next.svg" class="w-4 h-4" alt="Next" />
+                    <img src="public/icons/next.svg" class="w-4 h-4" alt="Next" />
                 </button>
                 <button id="shuffle-btn" type="button"
                         class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                    <img src="/icons/shuffle.svg" class="w-4 h-4" alt="Shuffle" />
+                    <img src="public/icons/shuffle.svg" class="w-4 h-4" alt="Shuffle" />
                 </button>
             </div>
 
@@ -66,7 +66,7 @@
         <div class="flex items-center space-x-2">
             <button id="mute-btn" type="button"
                     class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                <img id="volume-icon" src="/icons/sound-on.svg" class="w-4 h-4" alt="Volume" />
+                <img id="volume-icon" src="public/icons/sound-on.svg" class="w-4 h-4" alt="Volume" />
             </button>
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1"
                    class="w-20 accent-white/90 bg-white/20 rounded-full cursor-pointer">
@@ -83,7 +83,7 @@
 
         <div class="flex items-center gap-3 min-w-0">
             <div class="w-10 h-10 rounded-xl overflow-hidden bg-white/10 border border-white/20">
-                <img id="mobile-mini-cover" src="/images/placeholder.jpg"
+                <img id="mobile-mini-cover" src="public/images/placeholder.jpg"
                      class="w-full h-full object-cover"
                      alt="Cover" />
             </div>
@@ -100,11 +100,11 @@
         <div class="flex items-center gap-2">
             <button id="mobile-love-btn" type="button"
                     class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                <img src="/icons/love.svg" class="w-5 h-5" alt="Love" />
+                <img src="public/icons/love.svg" class="w-5 h-5" alt="Love" />
             </button>
             <button id="mobile-play-btn" type="button"
                     class="p-2 rounded-full bg-white/5 hover:bg-white/15 transition">
-                <img id="mobile-play-icon" src="/icons/play.svg" class="w-6 h-6" alt="Play" />
+                <img id="mobile-play-icon" src="public/icons/play.svg" class="w-6 h-6" alt="Play" />
             </button>
         </div>
     </div>
@@ -138,7 +138,7 @@
                 class="w-10 h-10 flex items-center justify-center rounded-full
                        bg-white/20 text-white backdrop-blur-sm
                        shadow-sm hover:bg-white/30 hover:scale-105 transition">
-            <img id="mobile-detail-love-icon" src="/icons/love.svg" class="w-5 h-5" alt="Love" />
+            <img id="mobile-detail-love-icon" src="public/icons/love.svg" class="w-5 h-5" alt="Love" />
         </button>
     </div>
 
@@ -146,7 +146,7 @@
     <div class="mt-10 flex justify-center">
         <div class="w-64 h-64 rounded-[2rem] overflow-hidden
                     shadow-[0_14px_40px_rgba(0,0,0,0.35)] bg-white/5 border border-white/20">
-            <img id="mobile-detail-cover" src="/images/placeholder.jpg"
+            <img id="mobile-detail-cover" src="public/images/placeholder.jpg"
                  class="w-full h-full object-cover" />
         </div>
     </div>
@@ -184,7 +184,7 @@
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="/icons/shuffle.svg" class="w-5 h-5" alt="Shuffle" />
+            <img src="public/icons/shuffle.svg" class="w-5 h-5" alt="Shuffle" />
         </button>
 
         <!-- Prev -->
@@ -194,7 +194,7 @@
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="/icons/prev.svg" class="w-6 h-6" alt="Previous" />
+            <img src="public/icons/prev.svg" class="w-6 h-6" alt="Previous" />
         </button>
 
         <!-- Play / Pause (utama) -->
@@ -204,8 +204,8 @@
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img id="mobile-detail-play-icon" src="/icons/play.svg" class="w-8 h-8" />
-            <img id="mobile-detail-pause-icon" src="/icons/pause.svg" class="w-8 h-8 hidden" />
+            <img id="mobile-detail-play-icon" src="public/icons/play.svg" class="w-8 h-8" />
+            <img id="mobile-detail-pause-icon" src="public/icons/pause.svg" class="w-8 h-8 hidden" />
         </button>
 
         <!-- Next -->
@@ -215,7 +215,7 @@
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="/icons/next.svg" class="w-6 h-6" alt="Next" />
+            <img src="public/icons/next.svg" class="w-6 h-6" alt="Next" />
         </button>
 
         <!-- Repeat -->
@@ -225,7 +225,7 @@
                        shadow-[0_10px_28px_rgba(12,53,140,0.75)]
                        hover:bg-[#184283] hover:shadow-[0_14px_34px_rgba(12,53,140,0.9)]
                        hover:scale-105 transition">
-            <img src="/icons/repeat.svg" class="w-5 h-5" alt="Repeat" />
+            <img src="public/icons/repeat.svg" class="w-5 h-5" alt="Repeat" />
         </button>
     </div>
 </div>
@@ -353,7 +353,7 @@
 
     // Update icon love (desktop, mini, dan header detail)
     function updateLoveIcon() {
-        const loveSrc = isLoved ? "/icons/love-filled.svg" : "/icons/love.svg";
+        const loveSrc = isLoved ? "public/icons/love-filled.svg" : "public/icons/love.svg";
 
         if (loveBtn) {
             const img = loveBtn.querySelector("img");
@@ -387,14 +387,14 @@
         if (!audio.src) return;
         if (audio.paused) {
             audio.play();
-            if (playIcon) playIcon.src = "/icons/pause.svg";
-            if (mobilePlayIcon) mobilePlayIcon.src = "/icons/pause.svg";
+            if (playIcon) playIcon.src = "public/icons/pause.svg";
+            if (mobilePlayIcon) mobilePlayIcon.src = "public/icons/pause.svg";
             if (mobileDetailPlayIcon) mobileDetailPlayIcon.classList.add("hidden");
             if (mobileDetailPauseIcon) mobileDetailPauseIcon.classList.remove("hidden");
         } else {
             audio.pause();
-            if (playIcon) playIcon.src = "/icons/play.svg";
-            if (mobilePlayIcon) mobilePlayIcon.src = "/icons/play.svg";
+            if (playIcon) playIcon.src = "public/icons/play.svg";
+            if (mobilePlayIcon) mobilePlayIcon.src = "public/icons/play.svg";
             if (mobileDetailPlayIcon) mobileDetailPlayIcon.classList.remove("hidden");
             if (mobileDetailPauseIcon) mobileDetailPauseIcon.classList.add("hidden");
         }
@@ -491,7 +491,7 @@
     }
 
     // Load Lagu Baru dan update UI
-    function loadSong(title, artist, src, cover = "/images/placeholder.jpg", index = 0) {
+    function loadSong(title, artist, src, cover = "public/images/placeholder.jpg", index = 0) {
         if (songTitle) songTitle.textContent = title;
         if (songArtist) songArtist.textContent = artist;
         if (mobileSongTitle) mobileSongTitle.textContent = title;
@@ -522,8 +522,8 @@
 
         // Play setelah user memilih lagu
         audio.play();
-        if (playIcon) playIcon.src = "/icons/pause.svg";
-        if (mobilePlayIcon) mobilePlayIcon.src = "/icons/pause.svg";
+        if (playIcon) playIcon.src = "public/icons/pause.svg";
+        if (mobilePlayIcon) mobilePlayIcon.src = "public/icons/pause.svg";
         if (mobileDetailPlayIcon && mobileDetailPauseIcon) {
             mobileDetailPlayIcon.classList.add("hidden");
             mobileDetailPauseIcon.classList.remove("hidden");
@@ -542,7 +542,7 @@
                 const src = item.getAttribute("data-src");
                 const title = item.getAttribute("data-title");
                 const artist = item.getAttribute("data-artist");
-                const cover = item.getAttribute("data-cover") || "/images/placeholder.jpg";
+                const cover = item.getAttribute("data-cover") || "public/images/placeholder.jpg";
                 if (!src) return;
                 loadSong(title, artist, src, cover, index);
             });
@@ -652,17 +652,17 @@
     // Volume & mute
     volumeSlider?.addEventListener("input", () => {
         audio.volume = volumeSlider.value;
-        if (volumeIcon) volumeIcon.src = audio.volume == 0 ? "/icons/sound-off.svg" : "/icons/sound-on.svg";
+        if (volumeIcon) volumeIcon.src = audio.volume == 0 ? "public/icons/sound-off.svg" : "public/icons/sound-on.svg";
     });
     muteBtn?.addEventListener("click", () => {
         if (audio.volume > 0) {
             audio.volume = 0;
             if (volumeSlider) volumeSlider.value = 0;
-            if (volumeIcon) volumeIcon.src = "/icons/sound-off.svg";
+            if (volumeIcon) volumeIcon.src = "public/icons/sound-off.svg";
         } else {
             audio.volume = 1;
             if (volumeSlider) volumeSlider.value = 1;
-            if (volumeIcon) volumeIcon.src = "/icons/sound-on.svg";
+            if (volumeIcon) volumeIcon.src = "public/icons/sound-on.svg";
         }
     });
 

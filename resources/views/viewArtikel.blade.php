@@ -4,7 +4,7 @@
     <div class="pb-16 mt-12">
         <div class="relative max-w-7xl mx-auto px-0 sm:px-4">
             <div class="relative rounded-xl overflow-hidden shadow-lg">
-                <img src="{{ asset('images/hsfixed.jpg') }}" alt="Concert" class="w-full h-96 object-cover">
+                <img src="{{ asset('public/images/hsfixed.jpg') }}" alt="Concert" class="w-full h-96 object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white flex justify-center">
                     <div class="max-w-xl">

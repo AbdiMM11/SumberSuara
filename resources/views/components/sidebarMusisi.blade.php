@@ -42,7 +42,7 @@
                 </div>
             @else
                 <div class="w-12 h-12 rounded-xl bg-white shadow-md flex items-center justify-center border border-slate-200">
-                    <img src="{{ asset('icons/user.svg') }}"
+                    <img src="{{ asset('public/icons/user.svg') }}"
                          class="w-7 h-7 opacity-70" alt="Musisi">
                 </div>
             @endif
@@ -79,7 +79,7 @@
 
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ ms_icon(Route::is('musisi.dashboard')) }} transition duration-200">
-                <img src="{{ asset('icons/dashboard.svg') }}"
+                <img src="{{ asset('public/icons/dashboard.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
 
@@ -93,7 +93,7 @@
 
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ ms_icon(Route::is('musisi.profil')) }} transition duration-200">
-                <img src="{{ asset('icons/kelola-profil.svg') }}"
+                <img src="{{ asset('public/icons/kelola-profil.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
 
@@ -107,7 +107,7 @@
 
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ ms_icon(Route::is('musisi.karya')) }} transition duration-200">
-                <img src="{{ asset('icons/kelola-karya.svg') }}"
+                <img src="{{ asset('public/icons/kelola-karya.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
 
@@ -121,7 +121,7 @@
 
             <div class="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center
                         group-hover:bg-rose-100 transition duration-200">
-                <img src="{{ asset('icons/logout.svg') }}"
+                <img src="{{ asset('public/icons/logout.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
 

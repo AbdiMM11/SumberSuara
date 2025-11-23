@@ -41,7 +41,7 @@
             <!-- Logo utama (disamakan feel-nya dengan footer) -->
             <div class="flex justify-center md:justify-start items-center w-full md:w-auto">
                 <a href="{{ url('/') }}" class="inline-flex items-center">
-                    <img src="{{ asset('images/logo3.png') }}" alt="Logo"
+                    <img src="{{ asset('public/images/logo3.png') }}" alt="Logo"
                          class="h-16 sm:h-20 md:h-24 lg:h-30 w-auto object-contain drop-shadow-lg">
                 </a>
             </div>
@@ -51,7 +51,7 @@
                 @guest
                     {{-- Belum login: icon user → login --}}
                     <a href="{{ route('login') }}" class="text-white hover:text-blue-200">
-                        <img src="{{ asset('icons/user.svg') }}" alt="Login"
+                        <img src="{{ asset('public/icons/user.svg') }}" alt="Login"
                              class="h-8 w-8 transition transform hover:scale-110" />
                     </a>
                 @else
@@ -61,7 +61,7 @@
                                 type="button"
                                 class="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 border border-white/30
                                        hover:bg-white/20 transition transform hover:scale-110 focus:outline-none">
-                            <img src="{{ asset('icons/user.svg') }}" alt="Akun Audiens"
+                            <img src="{{ asset('public/icons/user.svg') }}" alt="Akun Audiens"
                                  class="h-5 w-5" />
                         </button>
 
@@ -83,7 +83,7 @@
                                 <img src="{{ asset('storage/' . $musisiLogo) }}" alt="Musisi"
                                      class="h-8 w-8 rounded-full object-cover border-2 border-white transition transform hover:scale-110" />
                             @else
-                                <img src="{{ asset('icons/user.svg') }}" alt="Akun"
+                                <img src="{{ asset('public/icons/user.svg') }}" alt="Akun"
                                      class="h-8 w-8 transition transform hover:scale-110" />
                             @endif
                         </a>
@@ -133,7 +133,7 @@
                                     type="button"
                                     class="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 border border-white/30
                                            hover:bg-white/20 transition transform hover:scale-110 focus:outline-none">
-                                <img src="{{ asset('icons/user.svg') }}" alt="Akun Audiens"
+                                <img src="{{ asset('public/icons/user.svg') }}" alt="Akun Audiens"
                                      class="h-5 w-5" />
                             </button>
 
@@ -158,7 +158,7 @@
                                 <img src="{{ asset('storage/' . $musisiLogo) }}" alt="Musisi"
                                      class="h-7 w-7 rounded-full object-cover border border-white" />
                             @else
-                                <img src="{{ asset('icons/user.svg') }}" alt="Akun"
+                                <img src="{{ asset('public/icons/user.svg') }}" alt="Akun"
                                      class="h-5 w-5" />
                             @endif
                         </a>
@@ -175,7 +175,7 @@
     <a href="{{ route('index') }}"
        class="flex flex-col items-center text-[11px] transition transform
               {{ request()->routeIs('index') ? 'scale-110 font-semibold' : 'hover:scale-110' }}">
-        <img src="{{ asset('icons/home.svg') }}" alt="Home"
+        <img src="{{ asset('public/icons/home.svg') }}" alt="Home"
              class="h-5 w-5 mt-1 mb-0.5" />
         Home
     </a>
@@ -183,7 +183,7 @@
     <a href="{{ route('event') }}"
        class="flex flex-col items-center text-[11px] transition transform
               {{ request()->routeIs('event','viewEvent') ? 'scale-110 font-semibold' : 'hover:scale-110' }}">
-        <img src="{{ asset('icons/event.svg') }}" alt="Event"
+        <img src="{{ asset('public/icons/event.svg') }}" alt="Event"
              class="h-5 w-5 mt-1 mb-0.5" />
         Event
     </a>
@@ -191,7 +191,7 @@
     <a href="{{ route('article') }}"
        class="flex flex-col items-center text-[11px] transition transform
               {{ request()->routeIs('article','viewArtikel') ? 'scale-110 font-semibold' : 'hover:scale-110' }}">
-        <img src="{{ asset('icons/article.svg') }}" alt="Artikel"
+        <img src="{{ asset('public/icons/article.svg') }}" alt="Artikel"
              class="h-5 w-5 mt-1 mb-0.5" />
         Artikel
     </a>
@@ -199,7 +199,7 @@
     <a href="{{ route('playlist') }}"
        class="flex flex-col items-center text-[11px] transition transform
               {{ request()->routeIs('playlist') ? 'scale-110 font-semibold' : 'hover:scale-110' }}">
-        <img src="{{ asset('icons/playlist.svg') }}" alt="Playlist"
+        <img src="{{ asset('public/icons/playlist.svg') }}" alt="Playlist"
              class="h-5 w-5 mt-1 mb-0.5" />
         Playlist
     </a>
@@ -207,7 +207,7 @@
     <a href="{{ route('about') }}"
        class="flex flex-col items-center text-[11px] transition transform
               {{ request()->routeIs('about') ? 'scale-110 font-semibold' : 'hover:scale-110' }}">
-        <img src="{{ asset('icons/about.svg') }}" alt="Tentang"
+        <img src="{{ asset('public/icons/about.svg') }}" alt="Tentang"
              class="h-5 w-5 mt-1 mb-0.5" />
         Tentang
     </a>

@@ -17,7 +17,7 @@
                 <div class="flex items-center gap-3">
 
                     {{-- LOGO SUMBER SUARA --}}
-                    <img src="{{ asset('images/logo.png') }}"
+                    <img src="{{ asset('public/images/logo.png') }}"
                          alt="Logo Sumber Suara"
                          class="h-10 w-10 object-contain rounded-lg shadow-sm">
 
@@ -45,7 +45,7 @@
                 {{-- Ilustrasi PILIH JENIS AKUN --}}
                 <div class="mb-4">
                     <div class="h-16 w-16 rounded-2xl bg-white flex items-center justify-center shadow-lg">
-                        <img src="{{ asset('images/jenis-akun.png') }}"
+                        <img src="{{ asset('public/images/jenis-akun.png') }}"
                              alt="Pilih Jenis Akun"
                              class="h-12 w-12 object-contain">
                     </div>
@@ -71,7 +71,7 @@
                         <div class="flex items-center gap-3">
                             <div
                                 class="h-10 w-10 rounded-lg bg-blue-50 flex items-center justify-center group-hover:bg-blue-100">
-                                <img src="{{ asset('images/logo-musisi.png') }}"
+                                <img src="{{ asset('public/images/logo-musisi.png') }}"
                                      alt="Akun Musisi"
                                      class="h-7 w-7 object-contain">
                             </div>
@@ -98,7 +98,7 @@
                         <div class="flex items-center gap-3">
                             <div
                                 class="h-10 w-10 rounded-lg bg-gray-50 flex items-center justify-center group-hover:bg-blue-50">
-                                <img src="{{ asset('images/logo-audiens.png') }}"
+                                <img src="{{ asset('public/images/logo-audiens.png') }}"
                                      alt="Akun Audiens"
                                      class="h-7 w-7 object-contain">
                             </div>

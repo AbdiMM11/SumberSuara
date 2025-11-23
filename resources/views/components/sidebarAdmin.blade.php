@@ -23,7 +23,7 @@
     <div class="px-4 pb-3 border-b border-slate-200/70">
         <div class="flex items-center gap-3">
             <div class="w-11 h-11 rounded-xl bg-white shadow-md flex items-center justify-center overflow-hidden">
-                <img src="{{ asset('images/logo.png') }}" alt="Logo"
+                <img src="{{ asset('public/images/logo.png') }}" alt="Logo"
                      class="w-9 h-9 object-contain">
             </div>
 
@@ -56,7 +56,7 @@
                   {{ admin_menu_item(Route::is('admin.dashboard')) }} transition duration-200">
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ admin_icon_wrap(Route::is('admin.dashboard')) }} transition duration-200">
-                <img src="{{ asset('icons/dashboard.svg') }}"
+                <img src="{{ asset('public/icons/dashboard.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
             <span>Dashboard</span>
@@ -71,7 +71,7 @@
                 <span class="flex items-center gap-3">
                     <div class="w-9 h-9 rounded-xl flex items-center justify-center
                                 {{ admin_icon_wrap(Route::is('admin.verifikasi','admin.daftarAcc')) }} transition duration-200">
-                        <img src="{{ asset('icons/kelola-akun.svg') }}"
+                        <img src="{{ asset('public/icons/kelola-akun.svg') }}"
                              class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
                     </div>
                     <span>Kelola Akun Musisi</span>
@@ -113,7 +113,7 @@
                   {{ admin_menu_item(Route::is('admin.event')) }} transition duration-200">
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ admin_icon_wrap(Route::is('admin.event')) }} transition duration-200">
-                <img src="{{ asset('icons/kalender-event.svg') }}"
+                <img src="{{ asset('public/icons/kalender-event.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
             <span>Kalender Event</span>
@@ -125,7 +125,7 @@
                   {{ admin_menu_item(Route::is('admin.artikel')) }} transition duration-200">
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ admin_icon_wrap(Route::is('admin.artikel')) }} transition duration-200">
-                <img src="{{ asset('icons/kelola-artikel.svg') }}"
+                <img src="{{ asset('public/icons/kelola-artikel.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
             <span>Kelola Artikel</span>
@@ -137,7 +137,7 @@
                   {{ admin_menu_item(Route::is('admin.heroSection')) }} transition duration-200">
             <div class="w-9 h-9 rounded-xl flex items-center justify-center
                         {{ admin_icon_wrap(Route::is('admin.heroSection')) }} transition duration-200">
-                <img src="{{ asset('icons/herosection.svg') }}"
+                <img src="{{ asset('public/icons/herosection.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
             <span>Kelola Hero Section</span>
@@ -149,7 +149,7 @@
                   hover:bg-rose-50 hover:text-rose-600 transition duration-200">
             <div class="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center
                         group-hover:bg-rose-100 transition duration-200">
-                <img src="{{ asset('icons/logout.svg') }}"
+                <img src="{{ asset('public/icons/logout.svg') }}"
                      class="w-5 h-5 transition-transform duration-300 group-hover:scale-110">
             </div>
             <span>Logout</span>

@@ -5,7 +5,7 @@
 
             {{-- DESKTOP: LOGO --}}
             <div class="hidden md:block flex-shrink-0">
-                <img src="{{ asset('images/logo.png') }}" class="h-20 object-contain drop-shadow-lg"
+                <img src="{{ asset('public/images/logo.png') }}" class="h-20 object-contain drop-shadow-lg"
                     alt="Logo Sumber Suara">
             </div>
 
@@ -35,14 +35,14 @@
                     <a href="https://instagram.com/sumbersuara.lpg" target="_blank"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="/icons/instagram.svg" class="w-5 h-5" alt="Instagram">
+                            <img src="public/icons/instagram.svg" class="w-5 h-5" alt="Instagram">
                         </div>
                     </a>
 
                     <a href="mailto:sumbersuara.lpg@gmail.com"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="/icons/gmail.svg" class="w-5 h-5" alt="Email">
+                            <img src="public/icons/gmail.svg" class="w-5 h-5" alt="Email">
                         </div>
                     </a>
 
@@ -53,14 +53,14 @@
                     <a href="https://instagram.com/sumbersuara.lpg" target="_blank"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="/icons/instagram.svg" class="w-5 h-5" alt="Instagram">
+                            <img src="public/icons/instagram.svg" class="w-5 h-5" alt="Instagram">
                         </div>
                     </a>
 
                     <a href="mailto:sumbersuara.lpg@gmail.com"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="/icons/gmail.svg" class="w-5 h-5" alt="Email">
+                            <img src="public/icons/gmail.svg" class="w-5 h-5" alt="Email">
                         </div>
                     </a>
                 </div>

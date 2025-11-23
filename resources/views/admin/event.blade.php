@@ -63,7 +63,7 @@
                                         <a href="{{ route('viewEvent', $event->id) }}"
                                             class="p-2 rounded-lg bg-gray-100 hover:bg-green-100 text-gray-600 hover:text-green-600 transition"
                                             title="Lihat Detail">
-                                            <img src="{{ asset('icons/view.svg') }}" alt="Lihat Detail"
+                                            <img src="{{ asset('public/icons/view.svg') }}" alt="Lihat Detail"
                                                 class="w-5 h-5 inline-block">
                                         </a>
 
@@ -71,7 +71,7 @@
                                         <a href="{{ route('admin.editEvent', $event->id) }}"
                                             class="p-2 rounded-lg bg-gray-100 hover:bg-blue-100 text-gray-600 hover:text-blue-600 transition"
                                             title="Edit">
-                                            <img src="{{ asset('icons/edit.svg') }}" alt="Edit"
+                                            <img src="{{ asset('public/icons/edit.svg') }}" alt="Edit"
                                                 class="w-5 h-5 inline-block">
                                         </a>
 
@@ -81,7 +81,7 @@
                                             data-delete-url="{{ route('admin.deleteEvent', $event->id) }}"
                                             class="p-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 transition"
                                             title="Hapus">
-                                            <img src="{{ asset('icons/delete.svg') }}" alt="Hapus"
+                                            <img src="{{ asset('public/icons/delete.svg') }}" alt="Hapus"
                                                 class="w-5 h-5 inline-block">
                                         </button>
                                     </div>
