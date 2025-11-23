@@ -117,7 +117,6 @@
                             <div class="relative sm:flex-1">
                                 <input type="text" name="q_song" value="{{ request('q_song') ?? '' }}"
                                     placeholder="Cari judul / musisi"
-
                                     class="w-full pl-7 pr-3 py-1.5 border border-gray-200 rounded-lg bg-gray-50
                                               focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-400
                                               text-[11px] sm:text-xs text-gray-800" />
@@ -158,11 +157,26 @@
                     {{-- LIST lagu sidebar --}}
                     <div id="playlist" class="space-y-2 max-h-80 sm:max-h-96 overflow-y-auto pr-1">
                         @forelse ($songs as $i => $song)
+                            @php
+                                // file_mp3 disimpan lewat ->store('karya/audio', 'public')
+                                $audioUrl = $song->file_mp3
+                                    ? asset('storage/app/public/' . $song->file_mp3)
+                                    : '';
+
+                                // logo musisi (fallback placeholder)
+                                $logoPath = $song->musisi?->profil?->logo;
+                                $coverUrl = $logoPath
+                                    ? asset('storage/app/public/' . $logoPath)
+                                    : asset('public/images/placeholder-band.jpg');
+                            @endphp
+
                             <div class="song-item group flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer"
-                                data-karya-id="{{ $song->id_karya }}" data-src="{{ $song->audio_url }}"
+                                data-karya-id="{{ $song->id_karya }}"
+                                data-src="{{ $audioUrl }}"
                                 data-title="{{ $song->judul }}"
                                 data-artist="{{ $song->musisi?->display_name ?? 'Musisi' }}"
-                                data-cover="{{ $song->cover_url }}" data-duration="{{ $song->durasi_format ?? '' }}"
+                                data-cover="{{ $coverUrl }}"
+                                data-duration="{{ $song->durasi_format ?? '' }}"
                                 data-favorite="{{ in_array($song->id_karya, $favoriteIds ?? []) ? 1 : 0 }}">
 
                                 <span
@@ -170,7 +184,7 @@
 
                                 <div class="relative shrink-0">
                                     <div class="w-11 h-11 rounded-lg overflow-hidden bg-gray-200">
-                                        <img src="{{ $song->cover_url }}" class="w-11 h-11 object-cover rounded-lg"
+                                        <img src="{{ $coverUrl }}" class="w-11 h-11 object-cover rounded-lg"
                                             alt="cover">
                                     </div>
                                     <span
@@ -292,7 +306,7 @@
                             @php
                                 $logo = $m->profil?->logo
                                     ? asset('storage/app/public/' . $m->profil->logo)
-                                    : asset('images/placeholder-band.jpg');
+                                    : asset('public/images/placeholder-band.jpg');
                             @endphp
                             <img src="{{ $logo }}" alt="Logo {{ $m->display_name }}"
                                 class="w-full h-full object-cover">
