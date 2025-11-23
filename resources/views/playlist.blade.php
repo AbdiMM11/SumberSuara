@@ -35,10 +35,9 @@
             <p class="text-[10px] md:text-xs text-white mt-0.5 tracking-wide">
                 Kumpulan lagu yang kamu sukai dari para musisi lokal
             </p>
-
         </div>
 
-
+        <!-- PLAYLIST FAVORIT -->
         <div id="playlist" class="space-y-1.5 max-h-96 overflow-y-auto">
             @auth
                 @forelse ($favorites as $i => $favorite)
@@ -46,18 +45,27 @@
                         $karya = $favorite->karya;
                         $musisi = $karya->musisi ?? null;
 
-                        // 🔹 pakai accessor display_name supaya konsisten dengan sidebar
+                        // Nama artis
                         $artistName = $musisi?->display_name ?? 'Musisi Lokal';
 
-                        $audioSrc = $karya->file_mp3 ? asset('storage/' . $karya->file_mp3) : '';
+                        // AUDIO (fix)
+                        $audioSrc = $karya->file_mp3
+                            ? asset('storage/app/public/' . $karya->file_mp3)
+                            : '';
 
-                        // 🔹 COVER: gunakan accessor cover_url (logo musisi / cover lagu) + fallback
-                        $cover = $karya->cover_url ?? asset('public/images/hsfixed.jpg');
+                        // COVER (fix + fallback)
+                        $coverPath = $musisi?->profil?->logo;
+                        $cover = $coverPath
+                            ? asset('storage/app/public/' . $coverPath)
+                            : asset('public/images/hsfixed.jpg');
                     @endphp
 
                     <div class="song-item group flex items-center gap-3 p-2 hover:bg-gray-50 rounded-lg cursor-pointer"
-                        data-karya-id="{{ $karya->id_karya }}" data-title="{{ $karya->judul }}"
-                        data-artist="{{ $artistName }}" data-src="{{ $audioSrc }}" data-cover="{{ $cover }}"
+                        data-karya-id="{{ $karya->id_karya }}"
+                        data-title="{{ $karya->judul }}"
+                        data-artist="{{ $artistName }}"
+                        data-src="{{ $audioSrc }}"
+                        data-cover="{{ $cover }}"
                         data-favorite="1">
 
                         <!-- Nomor (desktop) -->
@@ -65,7 +73,7 @@
                             {{ $i + 1 }}
                         </span>
 
-                        <!-- Thumbnail + Nomor (mobile badge) -->
+                        <!-- Thumbnail -->
                         <div class="relative shrink-0">
                             <div class="w-11 h-11 rounded-lg overflow-hidden bg-gray-200">
                                 <img src="{{ $cover }}" class="w-11 h-11 object-cover rounded-lg"
@@ -90,14 +98,15 @@
                             </p>
                         </div>
 
-                        <!-- Link ke Profil Musisi -->
+                        <!-- Link Profil Musisi -->
                         @if ($musisi)
                             <a href="{{ route('musisi.show', $musisi->id_musisi) }}"
                                 class="inline-flex items-center gap-1 text-xs font-medium text-[#1C4E95] hover:underline whitespace-nowrap mr-2 md:mr-8">
                                 Lihat Profil
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                    stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M9 5l7 7-7 7" />
                                 </svg>
                             </a>
                         @endif
@@ -116,7 +125,7 @@
             @endguest
         </div>
 
-        {{-- POPUP WAJIB LOGIN (muncul hanya untuk guest) --}}
+        {{-- POPUP WAJIB LOGIN --}}
         @guest
             <div id="must-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
                 <div class="bg-white rounded-2xl shadow-xl max-w-sm w-full mx-4 p-6">
@@ -149,7 +158,7 @@
                             modal.classList.add('hidden');
                         });
 
-                        // klik area gelap di luar card -> tutup popup
+                        // klik area gelap di luar card → tutup popup
                         modal.addEventListener('click', (e) => {
                             if (e.target === modal) {
                                 modal.classList.add('hidden');
