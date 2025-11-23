@@ -37,7 +37,7 @@
 
             @if ($musisiLogo)
                 <div class="w-12 h-12 rounded-xl bg-white shadow-md overflow-hidden border border-slate-200">
-                    <img src="{{ asset('storage/' . $musisiLogo) }}"
+                    <img src="{{ asset('storage/app/public/' . $musisiLogo) }}"
                          class="w-full h-full object-cover" alt="Musisi">
                 </div>
             @else

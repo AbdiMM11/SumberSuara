@@ -46,7 +46,9 @@
                             <p class="text-sm text-gray-700 group-hover:text-[#1C4E95]">
                                 {{ \Illuminate\Support\Str::limit($r->judul, 80) }}
                             </p>
-                            <p class="text-xs text-gray-500 mt-1">{{ optional($r->published_at)->format('d M Y') }}</p>
+                            <p class="text-xs text-gray-500 mt-1">
+                                {{ optional($r->published_at)->format('d M Y') }}
+                            </p>
                         </a>
                     @endforeach
                 </div>
@@ -55,10 +57,16 @@
             <!-- Main list -->
             <main class="md:col-span-3 space-y-6">
                 @foreach ($artikels as $a)
+                    @php
+                        $cover = $a->cover_path
+                            ? asset('storage/app/public/' . $a->cover_path)
+                            : 'https://placehold.co/600x400';
+                    @endphp
+
                     <a href="{{ route('viewArtikel', $a->slug) }}"
                         class="flex flex-col md:flex-row items-start bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition">
                         <div class="relative w-full md:w-52 h-40 overflow-hidden">
-                            <img src="{{ $a->cover_path ? asset('storage/' . $a->cover_path) : 'https://placehold.co/600x400' }}"
+                            <img src="{{ $cover }}"
                                 alt="Thumbnail" class="w-full h-full object-cover">
                         </div>
                         <div class="flex-1 p-4">
@@ -76,6 +84,7 @@
                         </div>
                     </a>
                 @endforeach
+
                 <div>{{ $artikels->links() }}</div>
             </main>
         </div>

@@ -175,7 +175,7 @@
                                 <div class="flex items-center gap-4 mb-1">
                                     <div class="rounded-2xl overflow-hidden border border-gray-200 bg-gray-100 shadow-sm">
                                         <img
-                                            src="{{ asset('storage/' . $event->flyer) }}"
+                                            src="{{ asset('storage/app/public/' . $event->flyer) }}"
                                             alt="Flyer Event"
                                             class="w-40 h-40 object-cover"
                                         >

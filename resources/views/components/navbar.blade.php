@@ -80,7 +80,7 @@
                         {{-- Admin & Musisi MOBILE: icon → langsung ke dashboard --}}
                         <a href="{{ $dashboardRoute }}" class="text-white hover:text-blue-200 flex items-center">
                             @if ($roleName === 'Musisi' && $musisiLogo)
-                                <img src="{{ asset('storage/' . $musisiLogo) }}" alt="Musisi"
+                                <img src="{{ asset('storage/app/public/' . $musisiLogo) }}" alt="Musisi"
                                      class="h-8 w-8 rounded-full object-cover border-2 border-white transition transform hover:scale-110" />
                             @else
                                 <img src="{{ asset('public/icons/user.svg') }}" alt="Akun"
@@ -155,7 +155,7 @@
                            class="flex items-center justify-center h-9 w-9 rounded-full bg-white/10 border border-white/30
                                   hover:bg-white/20 transition transform hover:scale-110">
                             @if ($roleName === 'Musisi' && $musisiLogo)
-                                <img src="{{ asset('storage/' . $musisiLogo) }}" alt="Musisi"
+                                <img src="{{ asset('storage/app/public/' . $musisiLogo) }}" alt="Musisi"
                                      class="h-7 w-7 rounded-full object-cover border border-white" />
                             @else
                                 <img src="{{ asset('public/icons/user.svg') }}" alt="Akun"

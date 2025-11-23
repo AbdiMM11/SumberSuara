@@ -234,7 +234,7 @@
                                 <div class="flex items-center">
                                     <div class="h-16 w-16 rounded-full overflow-hidden border border-gray-200 bg-gray-100 shadow-sm">
                                         <img
-                                            src="{{ asset('storage/' . $profil->logo) }}"
+                                            src="{{ asset('storage/app/public/' . $profil->logo) }}"
                                             class="h-full w-full object-cover"
                                             alt="Logo"
                                         >
@@ -413,7 +413,7 @@
                             @if (!empty($profil->foto))
                                 <div class="rounded-2xl overflow-hidden border border-gray-200 bg-gray-100 shadow-sm">
                                     <img
-                                        src="{{ asset('storage/' . $profil->foto) }}"
+                                        src="{{ asset('storage/app/public/' . $profil->foto) }}"
                                         class="w-full h-32 md:h-40 object-cover"
                                         alt="Foto utama"
                                     >
@@ -465,7 +465,7 @@
                                 @if (!empty($profil->{$col}))
                                     <div class="rounded-2xl overflow-hidden border border-gray-200 bg-gray-100 shadow-sm">
                                         <img
-                                            src="{{ asset('storage/' . $profil->{$col}) }}"
+                                            src="{{ asset('storage/app/public/' . $profil->{$col}) }}"
                                             class="w-full h-28 md:h-32 object-cover"
                                             alt="Foto {{ $loop->iteration }}"
                                         >

@@ -239,7 +239,7 @@
                                 </div>
                                 <div class="mt-3">
                                     <audio controls class="w-full">
-                                        <source src="{{ asset('storage/' . $musisi->file_mp3) }}" type="audio/mpeg">
+                                        <source src="{{ asset('storage/app/public/' . $musisi->file_mp3) }}" type="audio/mpeg">
                                         Browser kamu tidak mendukung pemutar audio.
                                     </audio>
                                 </div>

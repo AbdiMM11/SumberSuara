@@ -8,9 +8,7 @@
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
                 <div class="absolute bottom-6 left-6 right-6 text-white flex justify-center">
                     <div class="max-w-xl">
-                        <h1 class="text-2xl text-center md:text-3xl font-bold">
-                            Event - Sumber Suara
-                        </h1>
+                        <h1 class="text-2xl text-center md:text-3xl font-bold">Event - Sumber Suara</h1>
                         <p class="mt-2 text-center text-xs md:text-base font-light">
                             Temukan berbagai acara musik dan kreatif dari komunitas lokal. Jangan lewatkan jadwal konser,
                             showcase, dan kegiatan terbaru Sumber Suara.
@@ -40,30 +38,45 @@
     <!-- GRID EVENT -->
     <div class="max-w-7xl mx-auto px-4 py-12">
         <div id="event-grid" class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8">
+
             @forelse ($events as $event)
+
+                @php
+                    $flyer = $event->flyer
+                        ? asset('storage/app/public/' . $event->flyer)
+                        : 'https://picsum.photos/400/600';
+                @endphp
+
                 <a href="{{ route('viewEvent', $event->id) }}"
                     class="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-105 hover:shadow-2xl group">
+
                     <div class="relative h-72">
-                        <img src="{{ $event->flyer ? asset('storage/' . $event->flyer) : 'https://picsum.photos/400/600' }}"
-                            alt="Event Poster"
+                        <img src="{{ $flyer }}" alt="Event Poster"
                             class="w-full h-72 object-cover group-hover:scale-110 transition duration-500">
+
                         <span
-                            class="absolute top-3 left-3 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
+                            class="absolute top-3 left-3 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA]
+                            text-white text-xs font-semibold px-3 py-1 rounded-full shadow-md">
                             {{ \Carbon\Carbon::parse($event->tanggal)->isFuture() ? 'UPCOMING' : 'SELESAI' }}
                         </span>
                     </div>
+
                     <div class="p-4 flex flex-col gap-2">
                         <h3 class="text-sm font-semibold text-gray-900 group-hover:text-[#1C4E95] transition">
                             {{ $event->nama_event }}
                         </h3>
-                        <p class="text-xs text-gray-600">{{ $event->lokasi }} |
-                            {{ \Carbon\Carbon::parse($event->tanggal)->format('d-m-Y') }}
+
+                        <p class="text-xs text-gray-600">
+                            {{ $event->lokasi }} |
+                            {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
                         </p>
                     </div>
                 </a>
+
             @empty
                 <p class="col-span-4 text-center text-gray-500">Belum ada event tersedia.</p>
             @endforelse
+
         </div>
     </div>
 

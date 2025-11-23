@@ -1,7 +1,7 @@
 @extends('layouts.layoutAdmin')
 
 @section('content')
-    <div class="bg-gray-50 min-h-screen p-6">
+    <div class="min-h-screen bg-gradient-to-br from-slate-100 via-slate-50 to-slate-200 px-4 py-10 md:ml-12">
         <div class="max-w-7xl mx-auto space-y-8">
 
             {{-- Header --}}
@@ -17,11 +17,13 @@
                 <div class="flex flex-wrap gap-3 text-xs md:text-sm">
                     <span
                         class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-100">
-                        Published Artikel: <span class="font-semibold ml-1">{{ $artikelPublished }}</span>
+                        Published Artikel:
+                        <span class="font-semibold ml-1">{{ $artikelPublished }}</span>
                     </span>
                     <span
                         class="inline-flex items-center px-3 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-100">
-                        Draft Artikel: <span class="font-semibold ml-1">{{ $artikelDraft }}</span>
+                        Draft Artikel:
+                        <span class="font-semibold ml-1">{{ $artikelDraft }}</span>
                     </span>
                 </div>
             </div>
@@ -170,7 +172,7 @@
                     @endif
                 </div>
 
-                {{-- Insight Pendaftar (tanpa mini chart) --}}
+                {{-- Insight Pendaftar --}}
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-4">
                     <h2 class="text-lg font-semibold text-gray-900 mb-2">
                         Insight Pendaftar
@@ -192,7 +194,7 @@
                     </div>
                 </div>
 
-                {{-- Chart Pendaftar per Bulan (full width) --}}
+                {{-- Chart Pendaftar per Bulan --}}
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                     <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
                         <div>
@@ -221,171 +223,164 @@
                 </div>
             </div>
         </div>
+
+        {{-- Chart.js CDN --}}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+            // Data dari controller (PHP -> JS)
+            const umurLabels = @json($umurLabels);
+            const umurDataLaki = @json($umurDataLaki);
+            const umurDataPerempuan = @json($umurDataPerempuan);
+
+            const bulanLabels = @json($bulanLabels);
+            const pendaftarMusisiData = @json($pendaftarMusisiData);
+            const pendaftarAudiensData = @json($pendaftarAudiensData);
+
+            // ======== Chart: Demografi Audiens (Bar Grouped) ========
+            const audiensCanvas = document.getElementById('audiensDemografiChart');
+            if (audiensCanvas) {
+                const audiensCtx = audiensCanvas.getContext('2d');
+                new Chart(audiensCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: umurLabels,
+                        datasets: [{
+                                label: 'Laki-laki',
+                                data: umurDataLaki,
+                                backgroundColor: '#3b82f6',
+                                borderRadius: 6,
+                            },
+                            {
+                                label: 'Perempuan',
+                                data: umurDataPerempuan,
+                                backgroundColor: '#ec4899',
+                                borderRadius: 6,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.parsed.y} orang`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    font: {
+                                        size: 11
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0
+                                },
+                                grid: {
+                                    color: '#e5e7eb'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // ======== Chart: Pendaftar per Bulan (Line) ========
+            const pendaftarCanvas = document.getElementById('pendaftarChart');
+            if (pendaftarCanvas) {
+                const pendaftarCtx = pendaftarCanvas.getContext('2d');
+                new Chart(pendaftarCtx, {
+                    type: 'line',
+                    data: {
+                        labels: bulanLabels,
+                        datasets: [{
+                                label: 'Musisi',
+                                data: pendaftarMusisiData,
+                                borderColor: '#4f46e5',
+                                backgroundColor: 'rgba(79, 70, 229, 0.12)',
+                                fill: true,
+                                tension: 0.35,
+                                borderWidth: 2,
+                                pointRadius: 3,
+                                pointHoverRadius: 4,
+                            },
+                            {
+                                label: 'Audiens',
+                                data: pendaftarAudiensData,
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.12)',
+                                fill: true,
+                                tension: 0.35,
+                                borderWidth: 2,
+                                pointRadius: 3,
+                                pointHoverRadius: 4,
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false,
+                        },
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.dataset.label}: ${context.parsed.y} pendaftar`;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    font: {
+                                        size: 11
+                                    }
+                                },
+                                grid: {
+                                    display: false
+                                }
+                            },
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    precision: 0
+                                },
+                                grid: {
+                                    color: '#e5e7eb'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        </script>
     </div>
-
-    {{-- Chart.js CDN --}}
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Data dari controller (PHP -> JS)
-        const umurLabels = @json($umurLabels);
-        const umurDataLaki = @json($umurDataLaki);
-        const umurDataPerempuan = @json($umurDataPerempuan);
-
-        const bulanLabels = @json($bulanLabels);
-        const pendaftarMusisiData = @json($pendaftarMusisiData);
-        const pendaftarAudiensData = @json($pendaftarAudiensData);
-
-        // ======== Chart: Demografi Audiens (Bar Grouped) ========
-        const audiensCtx = document.getElementById('audiensDemografiChart').getContext('2d');
-        new Chart(audiensCtx, {
-            type: 'bar',
-            data: {
-                labels: umurLabels,
-                datasets: [{
-                        label: 'Laki-laki',
-                        data: umurDataLaki,
-                        backgroundColor: '#3b82f6',
-                        borderRadius: 6,
-                    },
-                    {
-                        label: 'Perempuan',
-                        data: umurDataPerempuan,
-                        backgroundColor: '#ec4899',
-                        borderRadius: 6,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function(context) {
-                                return `${context.dataset.label}: ${context.parsed.y} orang`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        stacked: false,
-                        ticks: {
-                            font: {
-                                size: 11
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        min: 0,
-                        max: 100,
-                        ticks: {
-                            stepSize: 10,
-                            precision: 0,
-                            callback: function(value) {
-                                return value;
-                            }
-                        },
-                        grid: {
-                            color: '#e5e7eb'
-                        }
-                    }
-                }
-            }
-        });
-
-        // ======== Chart: Pendaftar per Bulan (Line) ========
-        const pendaftarCtx = document.getElementById('pendaftarChart').getContext('2d');
-        new Chart(pendaftarCtx, {
-            type: 'line',
-            data: {
-                labels: bulanLabels,
-                datasets: [{
-                        label: 'Musisi',
-                        data: pendaftarMusisiData,
-                        borderColor: '#4f46e5',
-                        backgroundColor: 'rgba(79, 70, 229, 0.12)',
-                        fill: true,
-                        tension: 0.35,
-                        borderWidth: 2,
-                        pointRadius: 3,
-                        pointHoverRadius: 4,
-                    },
-                    {
-                        label: 'Audiens',
-                        data: pendaftarAudiensData,
-                        borderColor: '#10b981',
-                        backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                        fill: true,
-                        tension: 0.35,
-                        borderWidth: 2,
-                        pointRadius: 3,
-                        pointHoverRadius: 4,
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        mode: 'index',
-                        intersect: false,
-                        callbacks: {
-                            label: function(context) {
-                                return `${context.dataset.label}: ${context.parsed.y} pendaftar`;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: 11
-                            }
-                        },
-                        grid: {
-                            display: false
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        min: 0,
-                        max: 100,
-                        ticks: {
-                            stepSize: 10,
-                            precision: 0,
-                            callback: function(value) {
-                                return value;
-                            }
-                        },
-                        grid: {
-                            color: '#e5e7eb'
-                        }
-                    }
-                }
-            }
-        });
-    </script>
 @endsection

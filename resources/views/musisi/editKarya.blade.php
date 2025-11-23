@@ -167,7 +167,8 @@
                                         File saat ini:
                                         <span class="font-semibold">{{ basename($karya->file_mp3) }}</span>
                                     </p>
-                                    <audio class="w-full" controls src="{{ asset('storage/'.$karya->file_mp3) }}"></audio>
+                                    <audio class="w-full" controls
+                                           src="{{ asset('storage/app/public/'.$karya->file_mp3) }}"></audio>
                                 </div>
                             @endif
                         </div>
