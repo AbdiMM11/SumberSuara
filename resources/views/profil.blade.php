@@ -1,10 +1,18 @@
 @extends('layouts.layout')
 
-@php
-    use Illuminate\Support\Str;
-@endphp
-
 @section('content')
+    @php
+        // Ambil profil musisi (bisa null kalau belum diisi)
+        $profil = $musisi->profil ?? null;
+
+        // Kumpulkan foto galeri dari kolom foto_pilihan1–3
+        $galleryPhotos = collect([
+            $profil->foto_pilihan1 ?? null,
+            $profil->foto_pilihan2 ?? null,
+            $profil->foto_pilihan3 ?? null,
+        ])->filter(); // buang yang null/kosong
+    @endphp
+
     {{-- HEADER --}}
     <div
         class="bg-gradient-to-b from-[#1C4E95] via-[#1E3A8A] to-white
@@ -22,35 +30,21 @@
 
                         {{-- LOGO --}}
                         <div class="swiper-slide">
-                            <img src="{{ $musisi->profil?->logo
-                                ? asset('storage/app/public/' . $musisi->profil->logo)
-                                : asset('public/images/placeholder-logo.png') }}"
+                            <img src="{{ $profil?->logo ? asset('storage/app/public/' . $profil->logo) : asset('public/images/placeholder-logo.png') }}"
                                 class="w-full h-64 object-cover" alt="Logo">
                         </div>
 
                         {{-- FOTO UTAMA --}}
                         <div class="swiper-slide">
-                            <img src="{{ $musisi->profil?->foto
-                                ? asset('storage/app/public/' . $musisi->profil->foto)
-                                : asset('public/images/placeholder-main.jpg') }}"
+                            <img src="{{ $profil?->foto ? asset('storage/app/public/' . $profil->foto) : asset('public/images/placeholder-main.jpg') }}"
                                 class="w-full h-64 object-cover" alt="Foto utama">
                         </div>
 
-                        {{-- FOTO GALERI --}}
-                        @foreach ($photos ?? [] as $p)
-                            @php
-                                $photoPath = ltrim($p, '/');
-
-                                // kalau sudah mengandung 'storage/app/public' jangan ditambah lagi
-                                if (Str::startsWith($photoPath, 'storage/app/public')) {
-                                    $photoUrl = asset($photoPath);
-                                } else {
-                                    $photoUrl = asset('storage/app/public/' . $photoPath);
-                                }
-                            @endphp
-
+                        {{-- FOTO GALERI 1–3 --}}
+                        @foreach ($galleryPhotos as $p)
                             <div class="swiper-slide">
-                                <img src="{{ $photoUrl }}" class="w-full h-64 object-cover" alt="Foto">
+                                <img src="{{ asset('storage/app/public/' . $p) }}" class="w-full h-64 object-cover"
+                                    alt="Foto galeri">
                             </div>
                         @endforeach
                     </div>
@@ -62,7 +56,7 @@
             {{-- MUSISI INFO --}}
             <div class="mt-5 space-y-1">
                 <h2 class="text-3xl font-extrabold tracking-wide drop-shadow-lg">
-                    {{ $musisi->profil?->nama_panggung ?? ($musisi->user?->nama ?? 'Musisi') }}
+                    {{ $profil?->nama_panggung ?? ($musisi->user?->nama ?? 'Musisi') }}
                 </h2>
                 <p class="text-gray-200 text-sm">
                     {{ $musisi->domisili ?? '—' }}
@@ -71,9 +65,9 @@
                     @endif
                 </p>
 
-                @if ($musisi->profil?->desk_musisi)
+                @if ($profil?->desk_musisi)
                     <p class="text-gray-100 text-xs px-4 leading-relaxed mt-2">
-                        {{ $musisi->profil->desk_musisi }}
+                        {{ $profil->desk_musisi }}
                     </p>
                 @endif
             </div>
@@ -107,15 +101,13 @@
         {{-- ==================== DESKTOP HEADER ==================== --}}
         <div class="hidden lg:flex items-center gap-4 relative z-10 ml-4">
             <div class="w-16 h-16 rounded-full overflow-hidden shadow-lg ring-4 ring-white/30">
-                <img src="{{ $musisi->profil?->logo
-                    ? asset('storage/app/public/' . $musisi->profil->logo)
-                    : asset('public/images/placeholder-logo.png') }}"
+                <img src="{{ $profil?->logo ? asset('storage/app/public/' . $profil->logo) : asset('public/images/placeholder-logo.png') }}"
                     class="w-full h-full object-cover">
             </div>
 
             <div>
                 <h2 class="text-2xl font-bold">
-                    {{ $musisi->profil?->nama_panggung ?? ($musisi->user?->nama ?? 'Musisi') }}
+                    {{ $profil?->nama_panggung ?? ($musisi->user?->nama ?? 'Musisi') }}
                 </h2>
                 <p class="text-sm text-blue-100">
                     {{ $musisi->domisili ?? '—' }}
@@ -156,36 +148,28 @@
     <div class="container mx-auto px-4 lg:px-8 py-10 -mt-24 lg:-mt-0">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 
+            {{-- Foto utama besar --}}
             <div class="lg:col-span-9 relative hidden lg:block">
-                <img src="{{ $musisi->profil?->foto
-                    ? asset('storage/app/public/' . $musisi->profil->foto)
-                    : asset('public/images/placeholder-main.jpg') }}"
+                <img src="{{ $profil?->foto ? asset('storage/app/public/' . $profil->foto) : asset('public/images/placeholder-main.jpg') }}"
                     class="w-full h-[500px] object-cover rounded-2xl shadow-2xl">
 
-                @if ($musisi->profil?->desk_musisi)
+                @if ($profil?->desk_musisi)
                     <div
                         class="absolute -bottom-16 left-12 right-12 bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white p-6 shadow-lg text-center">
-                        <p class="text-sm md:text-base">{{ $musisi->profil->desk_musisi }}</p>
+                        <p class="text-sm md:text-base">{{ $profil->desk_musisi }}</p>
                     </div>
                 @endif
             </div>
 
+            {{-- Galeri 1–3 (kanan) --}}
             <div class="lg:col-span-3 hidden lg:grid grid-rows-3 gap-4 h-[500px]">
-                @forelse($photos ?? [] as $thumb)
-                    @php
-                        $thumbPath = ltrim($thumb, '/');
-
-                        if (Str::startsWith($thumbPath, 'storage/app/public')) {
-                            $thumbUrl = asset($thumbPath);
-                        } else {
-                            $thumbUrl = asset('storage/app/public/' . $thumbPath);
-                        }
-                    @endphp
-
-                    <img src="{{ $thumbUrl }}"
+                @forelse ($galleryPhotos as $thumb)
+                    <img src="{{ asset('storage/app/public/' . $thumb) }}"
                         class="w-full h-full object-cover rounded-xl shadow-lg hover:scale-[1.03] transition">
                 @empty
-                    <div class="rounded-xl bg-gray-100 grid place-content-center text-gray-400">No photos</div>
+                    <div class="rounded-xl bg-gray-100 grid place-content-center text-gray-400">
+                        No photos
+                    </div>
                 @endforelse
             </div>
         </div>
