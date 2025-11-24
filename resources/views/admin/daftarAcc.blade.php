@@ -204,8 +204,10 @@
                                                             @csrf
                                                             @method('DELETE')
                                                             <button type="submit"
-                                                                class="inline-flex items-center justify-center px-3 py-1.5 text-xs font-semibold rounded-md bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 transition">
-                                                                Hapus
+                                                                class="p-2 rounded-lg bg-gray-100 hover:bg-red-100 text-gray-600 hover:text-red-600 transition"
+                                                                title="Hapus">
+                                                                <img src="{{ asset('public/icons/delete.svg') }}"
+                                                                    alt="Hapus" class="w-5 h-5 inline-block">
                                                             </button>
                                                         </form>
                                                     @else
