@@ -152,14 +152,7 @@
 
                 {{-- Section Header --}}
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
-                    <div
-                        class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg flex-shrink-0">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">
+                    <h2 class="text-centertext-xl md:text-2xl font-bold text-gray-900">
                         Tentang Kegiatan
                     </h2>
                 </div>
