@@ -117,7 +117,7 @@
                             {{-- Input pencarian lagu --}}
                             <div class="relative sm:flex-1">
                                 <input type="text" name="q_song" value="{{ request('q_song') ?? '' }}"
-                                       placeholder="Cari judul / musisi"
+                                       placeholder="Cari lagu"
                                        class="w-full pl-7 pr-3 py-1.5 border border-gray-200 rounded-lg bg-gray-50
                                               focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-400
                                               text-[11px] sm:text-xs text-gray-800" />
@@ -252,7 +252,7 @@
                 {{-- Search text (2 kolom di mobile) --}}
                 <div class="relative col-span-2 sm:col-span-1 sm:flex-1">
                     <input type="text" name="q" value="{{ request('q') ?? '' }}"
-                           placeholder="Cari musisi / genre / domisili"
+                           placeholder="Cari musisi"
                            class="w-full pl-8 pr-3 py-1.5 sm:py-2 border border-transparent rounded-full
                                   text-[11px] sm:text-sm focus:outline-none focus:ring-1 focus:ring-blue-200
                                   text-gray-800" />
