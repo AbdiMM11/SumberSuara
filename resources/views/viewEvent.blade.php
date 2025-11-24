@@ -151,8 +151,8 @@
                 class="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 md:p-8 border border-gray-100">
 
                 {{-- Section Header --}}
-                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
-                    <h2 class="text-center text-xl md:text-2xl font-bold text-gray-900">
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100 text-left md:text-center">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">
                         Tentang Kegiatan
                     </h2>
                 </div>
