@@ -152,7 +152,7 @@
 
                 {{-- Section Header --}}
                 <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
-                    <h2 class="text-centertext-xl md:text-2xl font-bold text-gray-900">
+                    <h2 class="text-center text-xl md:text-2xl font-bold text-gray-900">
                         Tentang Kegiatan
                     </h2>
                 </div>
