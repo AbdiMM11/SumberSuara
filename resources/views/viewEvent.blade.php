@@ -24,10 +24,10 @@
         <div class="max-w-5xl mx-auto space-y-6 md:space-y-8">
 
             {{-- GRID UTAMA: DESKTOP 2 KOLOM, MOBILE 1 KOLOM --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 items-start">
 
                 {{-- KOLOM KANAN (MOBILE URUTAN PERTAMA): JUDUL + DETAIL + DESKRIPSI --}}
-                <div class="order-1 lg:order-2 space-y-4">
+                <div class="order-1 md:order-2 space-y-4">
 
                     {{-- CARD JUDUL EVENT --}}
                     <div
@@ -35,10 +35,10 @@
 
                         {{-- Shapes abu-abu lebih kecil --}}
                         <div
-                            class="pointer-events-none absolute -right-6 -top-6 w-20 h-20 rounded-full border border-gray-300/60">
+                            class="pointer-events-none absolute -right-6 -top-6 w-16 h-16 rounded-full border border-gray-300/60">
                         </div>
                         <div
-                            class="pointer-events-none absolute -left-10 bottom-0 w-24 h-24 rounded-full border border-gray-300/60">
+                            class="pointer-events-none absolute -left-10 bottom-0 w-20 h-20 rounded-full border border-gray-300/60">
                         </div>
 
                         <h3
@@ -55,47 +55,55 @@
 
                                 {{-- Tanggal --}}
                                 <div
-                                    class="flex flex-col items-center text-center bg-gray-50/90 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                                    class="flex items-center sm:flex-col sm:items-center bg-gray-50/90 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                                    {{-- Icon kiri di mobile, atas di desktop --}}
                                     <div
-                                        class="w-11 h-11 flex items-center justify-center rounded-full bg-orange-100 text-orange-600 text-xl mb-2">
+                                        class="w-11 h-11 flex items-center justify-center rounded-full bg-orange-100 text-orange-600 text-xl mr-3 sm:mr-0 sm:mb-2">
                                         📅
                                     </div>
-                                    <p class="text-[11px] text-gray-500 uppercase tracking-[0.16em]">
-                                        Tanggal
-                                    </p>
-                                    <p class="mt-1 font-semibold text-gray-800 text-sm">
-                                        {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
-                                    </p>
+                                    {{-- Teks kanan di mobile, bawah di desktop --}}
+                                    <div class="text-left sm:text-center">
+                                        <p class="text-[11px] text-gray-500 uppercase tracking-[0.16em]">
+                                            Tanggal
+                                        </p>
+                                        <p class="mt-1 font-semibold text-gray-800 text-sm">
+                                            {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
+                                        </p>
+                                    </div>
                                 </div>
 
                                 {{-- Lokasi --}}
                                 <div
-                                    class="flex flex-col items-center text-center bg-gray-50/90 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                                    class="flex items-center sm:flex-col sm:items-center bg-gray-50/90 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
                                     <div
-                                        class="w-11 h-11 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600 text-xl mb-2">
+                                        class="w-11 h-11 flex items-center justify-center rounded-full bg-yellow-100 text-yellow-600 text-xl mr-3 sm:mr-0 sm:mb-2">
                                         📍
                                     </div>
-                                    <p class="text-[11px] text-gray-500 uppercase tracking-[0.16em]">
-                                        Lokasi
-                                    </p>
-                                    <p class="mt-1 font-semibold text-gray-800 text-sm">
-                                        {{ $event->lokasi }}
-                                    </p>
+                                    <div class="text-left sm:text-center">
+                                        <p class="text-[11px] text-gray-500 uppercase tracking-[0.16em]">
+                                            Lokasi
+                                        </p>
+                                        <p class="mt-1 font-semibold text-gray-800 text-sm">
+                                            {{ $event->lokasi }}
+                                        </p>
+                                    </div>
                                 </div>
 
                                 {{-- Pengisi --}}
                                 <div
-                                    class="flex flex-col items-center text-center bg-gray-50/90 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
+                                    class="flex items-center sm:flex-col sm:items-center bg-gray-50/90 p-4 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-200">
                                     <div
-                                        class="w-11 h-11 flex items-center justify-center rounded-full bg-green-100 text-green-600 text-xl mb-2">
+                                        class="w-11 h-11 flex items-center justify-center rounded-full bg-green-100 text-green-600 text-xl mr-3 sm:mr-0 sm:mb-2">
                                         🎤
                                     </div>
-                                    <p class="text-[11px] text-gray-500 uppercase tracking-[0.16em]">
-                                        Pengisi Acara
-                                    </p>
-                                    <p class="mt-1 font-semibold text-gray-800 text-sm">
-                                        {{ $event->pengisi ?? '-' }}
-                                    </p>
+                                    <div class="text-left sm:text-center">
+                                        <p class="text-[11px] text-gray-500 uppercase tracking-[0.16em]">
+                                            Pengisi Acara
+                                        </p>
+                                        <p class="mt-1 font-semibold text-gray-800 text-sm">
+                                            {{ $event->pengisi ?? '-' }}
+                                        </p>
+                                    </div>
                                 </div>
 
                             </div>
@@ -114,8 +122,7 @@
                 </div>
 
                 {{-- KOLOM KIRI (MOBILE URUTAN KEDUA): FLYER EVENT --}}
-                <div class="order-2 lg:order-1">
-                    {{-- FLYER EVENT --}}
+                <div class="order-2 md:order-1">
                     @php
                         $flyer = $event->flyer
                             ? asset('storage/app/public/' . $event->flyer)
@@ -151,7 +158,6 @@
                     class="max-h-[90vh] max-w-[90vw] object-contain rounded-2xl shadow-2xl">
             </div>
 
-            {{-- SCRIPT --}}
             <script>
                 function openFlyerModal() {
                     document.getElementById('flyer-modal').classList.remove('hidden');
