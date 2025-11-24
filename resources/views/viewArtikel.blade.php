@@ -22,153 +22,176 @@
     </div>
 
     <div class="min-h-screen bg-gray-100 py-8 px-2">
-        <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-2 md:p-16">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-white shadow-lg rounded-3xl overflow-hidden p-4 md:p-8 lg:p-10">
 
-            {{-- ================= JUDUL & META ================= --}}
-            <div class="px-6 py-6 text-center border-b border-gray-200">
-                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
-                    {{ $artikel->judul }}
-                </h1>
-            </div>
+                {{-- ================= JUDUL + SHAPES ================= --}}
+                <div class="relative mb-8">
+                    {{-- Shapes abu-abu, kecil --}}
+                    <div
+                        class="pointer-events-none absolute -top-6 -left-4 w-12 h-12 rounded-full border border-gray-300/70">
+                    </div>
+                    <div
+                        class="pointer-events-none absolute -bottom-8 -right-8 w-20 h-20 rounded-full border border-gray-300/60">
+                    </div>
 
-            <div class="px-6 pt-4 flex flex-row items-center justify-between text-sm text-gray-600">
+                    <div class="text-center px-4 py-4">
+                        <h1 class="text-2xl md:text-3xl font-bold text-gray-800 leading-snug">
+                            {{ $artikel->judul }}
+                        </h1>
+                    </div>
+                </div>
 
-                {{-- Author kiri --}}
-                <p class="font-semibold text-gray-800">
-                    {{ $artikel->author }}
-                </p>
-
-                {{-- Published At kanan --}}
-                <p class="text-right">
-                    • {{ optional($artikel->published_at)->translatedFormat('d F Y') }}
-                </p>
-
-            </div>
-
-            {{-- ================= COVER ARTIKEL ================= --}}
-            <div class="px-6 py-8">
                 @php
                     $cover = $artikel->cover_path
                         ? asset('storage/app/public/' . $artikel->cover_path)
                         : 'https://placehold.co/1200x600';
                 @endphp
 
-                <img src="{{ $cover }}" alt="Gambar Artikel" class="w-full rounded-lg object-cover shadow-md">
-            </div>
+                {{-- ================= GRID UTAMA (DESKTOP: 2 KOLOM, MOBILE: 1 KOLOM) ================= --}}
+                <div class="grid gap-8 md:grid-cols-2 md:items-start">
 
-            {{-- ================= KONTEN ARTIKEL ================= --}}
-            <div class="px-6 pb-8 text-gray-700 space-y-6 leading-relaxed prose max-w-none">
-                {!! nl2br(e($artikel->konten)) !!}
-            </div>
-
-            {{-- ================= KOMENTAR ARTIKEL ================= --}}
-            <div class="border-t border-gray-200 bg-gray-50 px-6 py-6 mt-4 rounded-b-lg">
-
-                {{-- FLASH MESSAGE --}}
-                @if (session('success'))
-                    <div class="mb-4 p-3 rounded bg-green-50 text-green-700 text-sm">
-                        {{ session('success') }}
-                    </div>
-                @endif
-
-                @if ($errors->any())
-                    <div class="mb-4 p-3 rounded bg-red-50 text-red-700 text-sm">
-                        <ul class="list-disc list-inside">
-                            @foreach ($errors->all() as $e)
-                                <li>{{ $e }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-
-                <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Komentar</h2>
-
-                {{-- ================= LIST KOMENTAR CHAT BUBBLE ================= --}}
-                @php
-                    $currentUser = auth()->user();
-                @endphp
-
-                <div class="space-y-4 max-h-96 overflow-y-auto pr-1">
-
-                    @forelse ($artikel->komentars as $k)
-                        @php
-                            $isMine = $currentUser && $k->user_id === $currentUser->id;
-                            $isAdmin = $currentUser?->role?->nama_roles === 'Admin';
-                        @endphp
-
-                        <div class="flex {{ $isMine ? 'justify-end' : 'justify-start' }}">
-                            <div class="max-w-[80%] flex flex-col {{ $isMine ? 'items-end' : 'items-start' }}">
-
-                                {{-- Nama + waktu --}}
-                                <div class="mb-1 text-xs text-gray-500 {{ $isMine ? 'text-right' : 'text-left' }}">
-                                    <span class="font-semibold text-gray-700">
-                                        {{ $k->user->nama ?? ($k->user->email ?? 'Pengguna') }}
-                                    </span>
-                                    • {{ $k->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
-                                </div>
-
-                                {{-- Bubble Chat --}}
-                                <div class="relative">
-
-                                    <div
-                                        class="px-4 py-2 rounded-2xl text-sm leading-relaxed shadow-sm
-                                        {{ $isMine
-                                            ? 'bg-[#1C4E95] text-white rounded-br-sm'
-                                            : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm' }}">
-                                        {{ $k->isi }}
-                                    </div>
-
-                                    {{-- Tombol Hapus --}}
-                                    @if ($currentUser && ($isMine || $isAdmin))
-                                        <form action="{{ route('komentar.destroy', $k->id_komentar) }}" method="POST"
-                                            class="mt-1 {{ $isMine ? 'text-right' : 'text-left' }}"
-                                            onsubmit="return confirm('Yakin ingin menghapus komentar ini?');">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button class="text-[11px] text-red-500 hover:text-red-700">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    @endif
-
-                                </div>
-
-                            </div>
+                    {{-- KOLOM KIRI: FLYER / COVER ARTIKEL --}}
+                    <div class="px-2 md:px-0">
+                        <div class="relative overflow-hidden rounded-2xl shadow-md bg-gray-50">
+                            <img src="{{ $cover }}" alt="Gambar Artikel"
+                                class="w-full h-full object-cover rounded-2xl">
                         </div>
-                    @empty
-                        <p class="text-sm text-gray-500">Belum ada komentar. Jadilah yang pertama!</p>
-                    @endforelse
+                    </div>
+
+                    {{-- KOLOM KANAN: META + KONTEN --}}
+                    <div class="px-2 md:px-0">
+
+                        {{-- META AUTHOR + TANGGAL --}}
+                        <div class="flex flex-row items-center justify-between text-sm text-gray-600 mb-4">
+                            {{-- Author kiri --}}
+                            <p class="font-semibold text-gray-800">
+                                {{ $artikel->author }}
+                            </p>
+
+                            {{-- Published At kanan --}}
+                            <p class="text-right">
+                                • {{ optional($artikel->published_at)->translatedFormat('d F Y') }}
+                            </p>
+                        </div>
+
+                        {{-- KONTEN ARTIKEL --}}
+                        <div class="text-gray-700 space-y-6 leading-relaxed prose max-w-none text-justify">
+                            {!! nl2br(e($artikel->konten)) !!}
+                        </div>
+
+                    </div>
 
                 </div>
 
-                {{-- ================= FORM KOMENTAR ================= --}}
-                @auth
-                    <div class="mt-6">
-                        <h3 class="text-md md:text-lg font-semibold mb-2">Tulis Komentar</h3>
+                {{-- ================= KOMENTAR ARTIKEL ================= --}}
+                <div class="border-t border-gray-200 bg-gray-50 px-4 md:px-6 py-6 mt-8 rounded-3xl">
 
-                        <form action="{{ route('artikel.komentar.store', $artikel->slug) }}" method="POST" class="space-y-3">
-                            @csrf
+                    {{-- FLASH MESSAGE --}}
+                    @if (session('success'))
+                        <div class="mb-4 p-3 rounded-xl bg-green-50 text-green-700 text-sm">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
-                            <textarea name="isi" rows="3"
-                                class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#1C4E95] focus:outline-none"
-                                placeholder="Tulis komentar kamu di sini...">{{ old('isi') }}</textarea>
+                    @if ($errors->any())
+                        <div class="mb-4 p-3 rounded-xl bg-red-50 text-red-700 text-sm">
+                            <ul class="list-disc list-inside">
+                                @foreach ($errors->all() as $e)
+                                    <li>{{ $e }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-                            <button
-                                class="px-4 py-2 bg-[#1C4E95] text-white text-sm font-semibold rounded-lg hover:bg-[#153a70] transition">
-                                Kirim Komentar
-                            </button>
-                        </form>
+                    <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Komentar</h2>
+
+                    @php
+                        $currentUser = auth()->user();
+                    @endphp
+
+                    {{-- LIST KOMENTAR (CHAT BUBBLE) --}}
+                    <div class="space-y-4 max-h-96 overflow-y-auto pr-1">
+
+                        @forelse ($artikel->komentars as $k)
+                            @php
+                                $isMine = $currentUser && $k->user_id === $currentUser->id;
+                                $isAdmin = $currentUser?->role?->nama_roles === 'Admin';
+                            @endphp
+
+                            <div class="flex {{ $isMine ? 'justify-end' : 'justify-start' }}">
+                                <div class="max-w-[80%] flex flex-col {{ $isMine ? 'items-end' : 'items-start' }}">
+
+                                    {{-- Nama + waktu --}}
+                                    <div class="mb-1 text-xs text-gray-500 {{ $isMine ? 'text-right' : 'text-left' }}">
+                                        <span class="font-semibold text-gray-700">
+                                            {{ $k->user->nama ?? ($k->user->email ?? 'Pengguna') }}
+                                        </span>
+                                        • {{ $k->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
+                                    </div>
+
+                                    {{-- Bubble Chat --}}
+                                    <div class="relative">
+                                        <div
+                                            class="px-4 py-2 rounded-2xl text-sm leading-relaxed shadow-sm
+                                        {{ $isMine
+                                            ? 'bg-[#1C4E95] text-white rounded-br-sm'
+                                            : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm' }}">
+                                            {{ $k->isi }}
+                                        </div>
+
+                                        {{-- Tombol Hapus --}}
+                                        @if ($currentUser && ($isMine || $isAdmin))
+                                            <form action="{{ route('komentar.destroy', $k->id_komentar) }}" method="POST"
+                                                class="mt-1 {{ $isMine ? 'text-right' : 'text-left' }}"
+                                                onsubmit="return confirm('Yakin ingin menghapus komentar ini?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="text-[11px] text-red-500 hover:text-red-700">
+                                                    Hapus
+                                                </button>
+                                            </form>
+                                        @endif
+
+                                    </div>
+                                </div>
+                            </div>
+                        @empty
+                            <p class="text-sm text-gray-500">Belum ada komentar. Jadilah yang pertama!</p>
+                        @endforelse
+
                     </div>
-                @else
-                    <div class="mt-6 text-sm text-gray-700">
-                        Silakan
-                        <a href="{{ route('login') }}" class="text-[#1C4E95] font-semibold hover:underline">login</a>
-                        untuk menulis komentar.
-                    </div>
-                @endauth
+
+                    {{-- FORM KOMENTAR --}}
+                    @auth
+                        <div class="mt-6">
+                            <h3 class="text-md md:text-lg font-semibold mb-2">Tulis Komentar</h3>
+
+                            <form action="{{ route('artikel.komentar.store', $artikel->slug) }}" method="POST"
+                                class="space-y-3">
+                                @csrf
+
+                                <textarea name="isi" rows="3"
+                                    class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#1C4E95] focus:outline-none"
+                                    placeholder="Tulis komentar kamu di sini...">{{ old('isi') }}</textarea>
+
+                                <button
+                                    class="px-4 py-2 bg-[#1C4E95] text-white text-sm font-semibold rounded-lg hover:bg-[#153a70] transition">
+                                    Kirim Komentar
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <div class="mt-6 text-sm text-gray-700">
+                            Silakan
+                            <a href="{{ route('login') }}" class="text-[#1C4E95] font-semibold hover:underline">login</a>
+                            untuk menulis komentar.
+                        </div>
+                    @endauth
+
+                </div>
 
             </div>
-
         </div>
     </div>
 @endsection
