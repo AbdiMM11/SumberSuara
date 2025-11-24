@@ -33,7 +33,7 @@
                 {{-- KOLOM KIRI: FLYER (40% di Desktop) --}}
                 <div class="w-full lg:w-2/5 flex-shrink-0 order-2 lg:order-1">
                     <div
-                        class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative lg:sticky lg:top-8 max-h-[90vh]">
+                        class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative lg:sticky lg:top-8">
 
                         {{-- Decorative Background --}}
                         <div
@@ -49,7 +49,7 @@
                                 class="relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 to-gray-50 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50 group block">
 
                                 <img src="{{ $flyer }}" alt="Event Flyer"
-                                    class="w-full h-auto max-h-[600px] lg:max-h-[700px] object-contain rounded-2xl">
+                                    class="w-full h-auto max-h-[400px] sm:max-h-[500px] lg:max-h-[550px] object-contain rounded-2xl mx-auto">
 
                                 {{-- Overlay on Hover --}}
                                 <div
