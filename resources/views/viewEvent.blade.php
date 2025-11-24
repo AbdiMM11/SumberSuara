@@ -1,18 +1,20 @@
 @extends('layouts.layout')
 
 @section('content')
-    <div class="pb-16 mt-12">
-        <div class="relative max-w-7xl mx-auto px-0 sm:px-4">
-            <div class="relative rounded-xl overflow-hidden shadow-lg">
-                <img src="{{ asset('public/images/hsfixed.jpg') }}" alt="Concert" class="w-full h-96 object-cover">
+    {{-- HERO --}}
+    <div class="pb-12 mt-12">
+        <div class="relative max-w-6xl mx-auto px-4">
+            <div class="relative rounded-3xl overflow-hidden shadow-lg">
+                <img src="{{ asset('public/images/hsfixed.jpg') }}" alt="Concert"
+                    class="w-full h-[240px] md:h-96 object-cover">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
 
                 <div class="absolute bottom-6 left-6 right-6 text-white flex justify-center">
                     <div class="max-w-xl">
                         <h1 class="text-2xl text-center md:text-3xl font-bold">Event - Sumber Suara</h1>
                         <p class="mt-2 text-center text-xs md:text-base font-light">
-                            Temukan berbagai acara musik dan kreatif dari komunitas lokal. Jangan lewatkan jadwal konser,
-                            showcase, dan kegiatan terbaru Sumber Suara.
+                            Temukan berbagai acara musik dan kreatif dari komunitas lokal. Jangan lewatkan jadwal
+                            konser, showcase, dan kegiatan terbaru Sumber Suara.
                         </p>
                     </div>
                 </div>
@@ -24,14 +26,15 @@
         $flyer = $event->flyer ? asset('storage/app/public/' . $event->flyer) : 'https://picsum.photos/400/600';
     @endphp
 
-    <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20 py-8 px-4 sm:py-12">
-        <div class="max-w-7xl mx-auto">
+    {{-- SECTION EVENT --}}
+    <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20 py-8 sm:py-12">
+        <div class="max-w-6xl mx-auto px-4 overflow-x-hidden">
 
             {{-- Main Container dengan Flexbox --}}
             <div class="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-8">
 
-                {{-- KOLOM KIRI: FLYER (40% di Desktop) --}}
-                <div class="w-full lg:w-2/5 flex-shrink-0 order-2 lg:order-1">
+                {{-- KOLOM KIRI: FLYER (≈40% di Desktop) --}}
+                <div class="w-full lg:w-5/12 flex-shrink-0 order-2 lg:order-1">
                     <div
                         class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative lg:sticky lg:top-8">
 
@@ -49,7 +52,7 @@
                                 class="relative w-full overflow-hidden rounded-2xl bg-gradient-to-br from-gray-100 to-gray-50 shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-blue-500/50 group block">
 
                                 <img src="{{ $flyer }}" alt="Event Flyer"
-                                    class="w-full h-auto max-h-[400px] sm:max-h-[500px] lg:max-h-[550px] object-contain rounded-2xl mx-auto">
+                                    class="w-full h-auto max-h-[380px] md:max-h-[480px] object-contain rounded-2xl mx-auto">
 
                                 {{-- Overlay on Hover --}}
                                 <div
@@ -79,8 +82,8 @@
                     </div>
                 </div>
 
-                {{-- KOLOM KANAN: KONTEN (60% di Desktop) --}}
-                <div class="w-full lg:w-3/5 flex-shrink-0 order-1 lg:order-2 space-y-6">
+                {{-- KOLOM KANAN: KONTEN (≈60% di Desktop) --}}
+                <div class="w-full lg:w-7/12 flex-shrink-0 min-w-0 order-1 lg:order-2 space-y-6">
 
                     {{-- Title Card --}}
                     <div
@@ -109,7 +112,8 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <p class="text-blue-100 text-xs md:text-sm font-medium mb-2 uppercase tracking-wider">
-                                        Featured Event</p>
+                                        Featured Event
+                                    </p>
                                     <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
                                         {{ $event->nama_event }}
                                     </h1>
@@ -132,7 +136,8 @@
                                 <div class="flex-1 min-w-0">
                                     <p
                                         class="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">
-                                        Tanggal</p>
+                                        Tanggal
+                                    </p>
                                     <p class="font-bold text-gray-900 text-xs md:text-sm leading-tight">
                                         {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
                                     </p>
@@ -151,7 +156,8 @@
                                 <div class="flex-1 min-w-0">
                                     <p
                                         class="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">
-                                        Lokasi</p>
+                                        Lokasi
+                                    </p>
                                     <p class="font-bold text-gray-900 text-xs md:text-sm leading-tight">
                                         {{ $event->lokasi }}
                                     </p>
@@ -170,7 +176,8 @@
                                 <div class="flex-1 min-w-0">
                                     <p
                                         class="text-[10px] md:text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">
-                                        Pengisi Acara</p>
+                                        Pengisi Acara
+                                    </p>
                                     <p class="font-bold text-gray-900 text-xs md:text-sm leading-tight">
                                         {{ $event->pengisi ?? '-' }}
                                     </p>
@@ -199,11 +206,9 @@
                         </div>
 
                         {{-- Description Text --}}
-                        <div class="prose prose-lg max-w-none">
-                            <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
-                                {{ $event->deskripsi }}
-                            </p>
-                        </div>
+                        <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                            {{ $event->deskripsi }}
+                        </p>
                     </div>
 
                 </div>
@@ -214,7 +219,7 @@
             <div id="flyer-modal"
                 class="hidden fixed inset-0 bg-black/80 backdrop-blur-md z-[9999] items-center justify-center px-4 animate-fade-in">
 
-                {{-- Close on backdrop click --}}
+                {{-- backdrop --}}
                 <div class="absolute inset-0" onclick="closeFlyerModal()"></div>
 
                 {{-- Close Button --}}
@@ -225,7 +230,6 @@
                     </svg>
                 </button>
 
-                {{-- Image Container --}}
                 <div class="relative max-w-5xl max-h-[90vh] animate-scale-in z-10">
                     <img src="{{ $flyer }}" class="max-h-[90vh] max-w-full object-contain rounded-3xl shadow-2xl">
                 </div>
@@ -266,13 +270,6 @@
         .animate-scale-in {
             animation: scale-in 0.3s ease-out;
         }
-
-        /* Pastikan tidak ada CSS yang override flex layout */
-        @media (min-width: 1024px) {
-            .lg\:flex-row {
-                flex-direction: row !important;
-            }
-        }
     </style>
 
     <script>
@@ -294,23 +291,9 @@
             }
         }
 
-        // Close modal with ESC key
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeFlyerModal();
-            }
-        });
-
-        // Prevent modal from closing when clicking on image
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('flyer-modal');
-            if (modal) {
-                const imageContainer = modal.querySelector('.animate-scale-in');
-                if (imageContainer) {
-                    imageContainer.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                    });
-                }
             }
         });
     </script>
