@@ -30,7 +30,7 @@
                 </p>
 
                 {{-- MOBILE ICONS --}}
-                <div class="flex md:hidden items-center justify-center space-x-4 mt-1">
+                <div class="flex md:hidden items-center justify-center space-x-4 mt-4">
 
                     <a href="https://instagram.com/sumbersuara.lpg" target="_blank"
                         class="hover:opacity-90 transition transform hover:scale-110">
