@@ -1,3 +1,9 @@
+@php
+    $LOGO_SS = asset('public/images/logo.png');
+    $ICON_INSTAGRAM = asset('public/icons/instagram.svg');
+    $ICON_GMAIL = asset('public/icons/gmail.svg');
+@endphp
+
 <footer id="main-footer" class="bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] text-white mt-20 md:mt-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-4 pb-16 md:pt-6 md:pb-6">
 
@@ -5,8 +11,7 @@
 
             {{-- DESKTOP: LOGO --}}
             <div class="hidden md:block flex-shrink-0">
-                <img src="{{ asset('public/images/logo.png') }}" class="h-20 object-contain drop-shadow-lg"
-                    alt="Logo Sumber Suara">
+                <img src="{{ $LOGO_SS }}" class="h-20 object-contain drop-shadow-lg" alt="Logo Sumber Suara">
             </div>
 
             {{-- TEKS TENGAH --}}
@@ -23,7 +28,7 @@
             </div>
 
             {{-- FOR MORE --}}
-            <div class="flex flex-col items-center w-full md:w-auto text-center space-y-2 mb-2 md:mb-0">
+            <div class="flex flex-col items-center w-full md:w-auto text-center space-y-2 mb-4 md:mb-0">
 
                 <p class="text-xs md:text-base font-semibold tracking-wide whitespace-nowrap">
                     For More Information
@@ -35,14 +40,14 @@
                     <a href="https://instagram.com/sumbersuara.lpg" target="_blank"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="public/icons/instagram.svg" class="w-5 h-5" alt="Instagram">
+                            <img src="{{ $ICON_INSTAGRAM }}" class="w-5 h-5" alt="Instagram">
                         </div>
                     </a>
 
                     <a href="mailto:sumbersuara.lpg@gmail.com"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="public/icons/gmail.svg" class="w-5 h-5" alt="Email">
+                            <img src="{{ $ICON_GMAIL }}" class="w-5 h-5" alt="Email">
                         </div>
                     </a>
 
@@ -53,14 +58,14 @@
                     <a href="https://instagram.com/sumbersuara.lpg" target="_blank"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="public/icons/instagram.svg" class="w-5 h-5" alt="Instagram">
+                            <img src="{{ $ICON_INSTAGRAM }}" class="w-5 h-5" alt="Instagram">
                         </div>
                     </a>
 
                     <a href="mailto:sumbersuara.lpg@gmail.com"
                         class="hover:opacity-90 transition transform hover:scale-110">
                         <div class="w-8 h-8 bg-white rounded-xl flex items-center justify-center shadow-md">
-                            <img src="public/icons/gmail.svg" class="w-5 h-5" alt="Email">
+                            <img src="{{ $ICON_GMAIL }}" class="w-5 h-5" alt="Email">
                         </div>
                     </a>
                 </div>
