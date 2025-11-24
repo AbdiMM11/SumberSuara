@@ -23,7 +23,7 @@
             </div>
 
             {{-- FOR MORE --}}
-            <div class="flex flex-col items-center w-full md:w-auto text-center space-y-2">
+            <div class="flex flex-col items-center w-full md:w-auto text-center space-y-2 mb-2 md:mb-0">
 
                 <p class="text-xs md:text-base font-semibold tracking-wide whitespace-nowrap">
                     For More Information
