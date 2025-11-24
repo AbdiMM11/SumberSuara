@@ -23,20 +23,37 @@
     <div class="min-h-screen bg-gray-50 py-10 px-4">
         <div class="max-w-5xl mx-auto space-y-6 md:space-y-8">
 
-            {{-- CARD JUDUL EVENT --}}
+            {{-- Title Card --}}
             <div
-                class="bg-gradient-to-r from-[#1C4E95] to-[#2F6EEA] py-5 px-4 md:px-8 text-center shadow-md rounded-3xl mx-1 md:mx-0 mt-2 relative overflow-hidden">
-                <div class="pointer-events-none absolute -right-10 -top-10 w-32 h-32 rounded-full border border-white/10">
+                class="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 rounded-3xl shadow-2xl p-6 md:p-8 relative overflow-hidden group">
+
+                {{-- Animated Background Shapes --}}
+                <div
+                    class="absolute -top-10 -left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000 pointer-events-none">
                 </div>
-                <div class="pointer-events-none absolute -left-16 bottom-0 w-40 h-40 rounded-full border border-white/10">
+                <div
+                    class="absolute -bottom-10 -right-10 w-40 h-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000 pointer-events-none">
+                </div>
+                <div
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/5 rounded-full blur-3xl pointer-events-none">
                 </div>
 
-                <h3 class="font-semibold tracking-wide text-white text-sm md:text-base uppercase drop-shadow">
-                    {{ $event->nama_event }}
-                </h3>
-                <p class="text-[10px] md:text-xs text-white mt-1 tracking-wide">
-                    Informasi lengkap mengenai event komunitas musik lokal
-                </p>
+                {{-- Content --}}
+                <div class="relative z-10">
+                    <div class="flex items-start gap-4">
+                        <div class="bg-white/20 backdrop-blur-sm p-3 rounded-2xl flex-shrink-0">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
+                                {{ $event->nama_event }}
+                            </h1>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             {{-- FLYER EVENT --}}
@@ -111,7 +128,7 @@
 
                     {{-- Speaker Card --}}
                     <div
-                        class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-4 md:p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group sm:col-span-2 lg:col-span-1">
+                        class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-4 md:p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
                         <div class="flex items-center gap-3 md:gap-4">
                             <div
                                 class="w-12 h-12 md:w-14 md:h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 text-white text-xl md:text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
@@ -129,12 +146,30 @@
                 </div>
             </div>
 
-            {{-- DESKRIPSI --}}
-            <div class="bg-white rounded-3xl shadow-lg p-4 md:p-6">
-                <h3 class="text-lg md:text-xl font-bold text-gray-800 mb-3">Tentang Kegiatan</h3>
-                <p class="text-gray-600 text-sm md:text-base leading-relaxed text-justify break-words">
-                    {{ $event->deskripsi ?? 'Belum ada deskripsi kegiatan untuk event ini.' }}
-                </p>
+            {{-- Description Card --}}
+            <div
+                class="bg-white rounded-3xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 md:p-8 border border-gray-100">
+
+                {{-- Section Header --}}
+                <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
+                    <div
+                        class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg flex-shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900">
+                        Tentang Kegiatan
+                    </h2>
+                </div>
+
+                {{-- Description Text --}}
+                <div class="prose prose-lg max-w-none">
+                    <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
+                        {{ $event->deskripsi }}
+                    </p>
+                </div>
             </div>
         </div>
 
