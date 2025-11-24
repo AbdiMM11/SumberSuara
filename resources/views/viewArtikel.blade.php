@@ -21,75 +21,58 @@
         </div>
     </div>
 
-    <div class="min-h-screen bg-gray-100 py-10 px-3">
-        <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-3xl overflow-hidden">
+    <div class="min-h-screen bg-gray-100 py-8 px-2">
+        <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-2 md:p-16">
 
-            {{-- ================= WRAPPER KONTEN ARTIKEL ================= --}}
-            <div class="px-6 md:px-12 pt-8 pb-10">
-
-                {{-- Label kecil --}}
-                <div class="flex justify-center mb-3">
-                    <span
-                        class="inline-flex items-center px-3 py-1 text-[11px] font-semibold tracking-wide uppercase rounded-full bg-gray-100 text-gray-600">
-                        Artikel
-                    </span>
-                </div>
-
-                {{-- ================= JUDUL ================= --}}
-                <div class="text-center">
-                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 leading-snug">
-                        {{ $artikel->judul }}
-                    </h1>
-                </div>
-
-                {{-- ================= META: AUTHOR + TANGGAL + LABEL ================= --}}
-                <div
-                    class="mt-4 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-xs md:text-sm text-gray-500">
-                    <span class="font-semibold text-gray-800">
-                        {{ $artikel->author }}
-                    </span>
-                    <span class="text-gray-400">•</span>
-                    <span>
-                        {{ optional($artikel->published_at)->translatedFormat('d F Y') }}
-                    </span>
-                    <span class="text-gray-400">•</span>
-                    <span>Artikel</span>
-                </div>
-
-                {{-- ================= COVER ARTIKEL ================= --}}
-                <div class="mt-8 md:mt-10">
-                    @php
-                        $cover = $artikel->cover_path
-                            ? asset('storage/app/public/' . $artikel->cover_path)
-                            : 'https://placehold.co/1200x600';
-                    @endphp
-
-                    <div class="overflow-hidden rounded-2xl shadow-md">
-                        <img src="{{ $cover }}" alt="Gambar Artikel"
-                            class="w-full object-cover transform hover:scale-[1.01] transition duration-300 ease-out">
-                    </div>
-                </div>
-
-                {{-- ================= KONTEN ARTIKEL ================= --}}
-                <div class="mt-10 text-gray-800 leading-relaxed">
-                    <div class="prose prose-sm md:prose-base prose-slate max-w-none text-justify">
-                        {!! nl2br(e($artikel->konten)) !!}
-                    </div>
-                </div>
+            {{-- ================= JUDUL & META ================= --}}
+            <div class="px-6 py-6 text-center border-b border-gray-200">
+                <h1 class="text-2xl md:text-3xl font-bold text-gray-800">
+                    {{ $artikel->judul }}
+                </h1>
             </div>
 
-            {{-- ================= AREA KOMENTAR ================= --}}
-            <div class="border-t border-gray-200 bg-gray-50 px-6 md:px-12 py-8">
+            <div class="px-6 pt-4 flex flex-row items-center justify-between text-sm text-gray-600">
+
+                {{-- Author kiri --}}
+                <p class="font-semibold text-gray-800">
+                    {{ $artikel->author }}
+                </p>
+
+                {{-- Published At kanan --}}
+                <p class="text-right">
+                    • {{ optional($artikel->published_at)->translatedFormat('d F Y') }}
+                </p>
+
+            </div>
+
+            {{-- ================= COVER ARTIKEL ================= --}}
+            <div class="px-6 py-8">
+                @php
+                    $cover = $artikel->cover_path
+                        ? asset('storage/app/public/' . $artikel->cover_path)
+                        : 'https://placehold.co/1200x600';
+                @endphp
+
+                <img src="{{ $cover }}" alt="Gambar Artikel" class="w-full rounded-lg object-cover shadow-md">
+            </div>
+
+            {{-- ================= KONTEN ARTIKEL ================= --}}
+            <div class="px-6 pb-8 text-gray-700 space-y-6 leading-relaxed prose max-w-none">
+                {!! nl2br(e($artikel->konten)) !!}
+            </div>
+
+            {{-- ================= KOMENTAR ARTIKEL ================= --}}
+            <div class="border-t border-gray-200 bg-gray-50 px-6 py-6 mt-4 rounded-b-lg">
 
                 {{-- FLASH MESSAGE --}}
                 @if (session('success'))
-                    <div class="mb-4 p-3 rounded-lg bg-green-50 text-green-700 text-sm shadow-sm">
+                    <div class="mb-4 p-3 rounded bg-green-50 text-green-700 text-sm">
                         {{ session('success') }}
                     </div>
                 @endif
 
                 @if ($errors->any())
-                    <div class="mb-4 p-3 rounded-lg bg-red-50 text-red-700 text-sm shadow-sm">
+                    <div class="mb-4 p-3 rounded bg-red-50 text-red-700 text-sm">
                         <ul class="list-disc list-inside">
                             @foreach ($errors->all() as $e)
                                 <li>{{ $e }}</li>
@@ -98,11 +81,9 @@
                     </div>
                 @endif
 
-                <h2 class="text-lg md:text-xl font-bold text-gray-900 mb-4 md:mb-5">
-                    Komentar
-                </h2>
+                <h2 class="text-lg md:text-xl font-bold text-gray-800 mb-4">Komentar</h2>
 
-                {{-- ================= LIST KOMENTAR (BUBBLE CHAT) ================= --}}
+                {{-- ================= LIST KOMENTAR CHAT BUBBLE ================= --}}
                 @php
                     $currentUser = auth()->user();
                 @endphp
@@ -113,42 +94,28 @@
                         @php
                             $isMine = $currentUser && $k->user_id === $currentUser->id;
                             $isAdmin = $currentUser?->role?->nama_roles === 'Admin';
-
-                            $namaUser = $k->user->nama ?? ($k->user->email ?? 'Pengguna');
-                            $initial = mb_substr($namaUser, 0, 1);
                         @endphp
 
                         <div class="flex {{ $isMine ? 'justify-end' : 'justify-start' }}">
-                            <div class="flex items-end gap-2 max-w-[85%] {{ $isMine ? 'flex-row-reverse' : '' }}">
+                            <div class="max-w-[80%] flex flex-col {{ $isMine ? 'items-end' : 'items-start' }}">
 
-                                {{-- Avatar bulat --}}
-                                <div class="flex-shrink-0">
-                                    <div
-                                        class="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold
-                                    {{ $isMine ? 'bg-blue-600 text-white' : 'bg-gray-300 text-gray-800' }}">
-                                        {{ strtoupper($initial) }}
-                                    </div>
+                                {{-- Nama + waktu --}}
+                                <div class="mb-1 text-xs text-gray-500 {{ $isMine ? 'text-right' : 'text-left' }}">
+                                    <span class="font-semibold text-gray-700">
+                                        {{ $k->user->nama ?? ($k->user->email ?? 'Pengguna') }}
+                                    </span>
+                                    • {{ $k->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
                                 </div>
 
-                                <div class="flex flex-col {{ $isMine ? 'items-end' : 'items-start' }} w-full">
+                                {{-- Bubble Chat --}}
+                                <div class="relative">
 
-                                    {{-- Nama + waktu --}}
-                                    <div class="mb-1 text-[11px] text-gray-500 {{ $isMine ? 'text-right' : '' }}">
-                                        <span class="font-semibold text-gray-700">
-                                            {{ $namaUser }}
-                                        </span>
-                                        • {{ $k->created_at->timezone('Asia/Jakarta')->format('d M Y H:i') }}
-                                    </div>
-
-                                    {{-- Bubble --}}
-                                    <div class="relative">
-                                        <div
-                                            class="px-4 py-2.5 text-sm leading-relaxed shadow-sm
+                                    <div
+                                        class="px-4 py-2 rounded-2xl text-sm leading-relaxed shadow-sm
                                         {{ $isMine
-                                            ? 'bg-[#1C4E95] text-white rounded-2xl rounded-br-sm'
-                                            : 'bg-white text-gray-800 border border-gray-200 rounded-2xl rounded-bl-sm' }}">
-                                            {{ $k->isi }}
-                                        </div>
+                                            ? 'bg-[#1C4E95] text-white rounded-br-sm'
+                                            : 'bg-white text-gray-800 border border-gray-200 rounded-bl-sm' }}">
+                                        {{ $k->isi }}
                                     </div>
 
                                     {{-- Tombol Hapus --}}
@@ -165,12 +132,11 @@
                                     @endif
 
                                 </div>
+
                             </div>
                         </div>
                     @empty
-                        <p class="text-sm text-gray-500">
-                            Belum ada komentar. Jadilah yang pertama!
-                        </p>
+                        <p class="text-sm text-gray-500">Belum ada komentar. Jadilah yang pertama!</p>
                     @endforelse
 
                 </div>
@@ -178,19 +144,17 @@
                 {{-- ================= FORM KOMENTAR ================= --}}
                 @auth
                     <div class="mt-6">
-                        <h3 class="text-md md:text-lg font-semibold mb-2">
-                            Tulis Komentar
-                        </h3>
+                        <h3 class="text-md md:text-lg font-semibold mb-2">Tulis Komentar</h3>
 
                         <form action="{{ route('artikel.komentar.store', $artikel->slug) }}" method="POST" class="space-y-3">
                             @csrf
 
                             <textarea name="isi" rows="3"
-                                class="w-full border rounded-xl px-3 py-2.5 text-sm bg-white focus:ring-2 focus:ring-[#1C4E95] focus:outline-none"
-                                placeholder="Bagikan pendapat atau tanggapanmu di sini...">{{ old('isi') }}</textarea>
+                                class="w-full border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-[#1C4E95] focus:outline-none"
+                                placeholder="Tulis komentar kamu di sini...">{{ old('isi') }}</textarea>
 
                             <button
-                                class="px-5 py-2.5 bg-[#1C4E95] text-white text-sm font-semibold rounded-xl hover:bg-[#153a70] transition">
+                                class="px-4 py-2 bg-[#1C4E95] text-white text-sm font-semibold rounded-lg hover:bg-[#153a70] transition">
                                 Kirim Komentar
                             </button>
                         </form>
@@ -198,15 +162,13 @@
                 @else
                     <div class="mt-6 text-sm text-gray-700">
                         Silakan
-                        <a href="{{ route('login') }}" class="text-[#1C4E95] font-semibold hover:underline">
-                            login
-                        </a>
+                        <a href="{{ route('login') }}" class="text-[#1C4E95] font-semibold hover:underline">login</a>
                         untuk menulis komentar.
                     </div>
                 @endauth
 
             </div>
+
         </div>
     </div>
-
 @endsection
