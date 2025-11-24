@@ -23,26 +23,13 @@
     <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20 py-8 px-4 sm:py-12">
         <div class="max-w-7xl mx-auto">
 
-            {{-- Header Breadcrumb --}}
-            <div class="mb-6 animate-fade-in">
-                <nav class="flex items-center gap-2 text-sm text-gray-600">
-                    <a href="#" class="hover:text-blue-600 transition-colors">Home</a>
-                    <span>›</span>
-                    <a href="#" class="hover:text-blue-600 transition-colors">Events</a>
-                    <span>›</span>
-                    <span class="text-gray-900 font-medium">Detail</span>
-                </nav>
-            </div>
+            {{-- Main Content Grid - 2 Columns --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
 
-            {{-- Main Content Grid --}}
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
-
-                {{-- LEFT COLUMN - Flyer & Quick Actions (40%) --}}
-                <div class="lg:col-span-2 space-y-6">
-
-                    {{-- Flyer Card --}}
+                {{-- LEFT COLUMN - Flyer Only --}}
+                <div class="order-2 lg:order-1">
                     <div
-                        class="group bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative">
+                        class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative sticky top-8">
 
                         {{-- Decorative Background --}}
                         <div
@@ -66,7 +53,7 @@
                                    focus:outline-none focus:ring-4 focus:ring-blue-500/50 group">
 
                                 <img src="{{ $flyer }}" alt="Event Flyer"
-                                    class="w-full h-auto max-h-[500px] object-cover rounded-2xl">
+                                    class="w-full h-auto max-h-[600px] object-cover rounded-2xl">
 
                                 {{-- Overlay on Hover --}}
                                 <div
@@ -85,7 +72,7 @@
                             </button>
 
                             {{-- Hint Text --}}
-                            <p class="text-xs text-gray-500 text-center mt-3 flex items-center justify-center gap-2">
+                            <p class="text-xs text-gray-500 text-center mt-4 flex items-center justify-center gap-2">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -96,42 +83,14 @@
                             </p>
                         </div>
                     </div>
-
-                    {{-- Quick Action Buttons --}}
-                    <div class="grid grid-cols-2 gap-4">
-                        <button
-                            class="group bg-white hover:bg-gradient-to-r hover:from-blue-600 hover:to-blue-500
-                                   text-gray-700 hover:text-white font-semibold py-4 px-6 rounded-2xl
-                                   shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300
-                                   flex items-center justify-center gap-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
-                            </svg>
-                            <span>Bagikan</span>
-                        </button>
-
-                        <button
-                            class="group bg-white hover:bg-gradient-to-r hover:from-pink-600 hover:to-rose-500
-                                   text-gray-700 hover:text-white font-semibold py-4 px-6 rounded-2xl
-                                   shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300
-                                   flex items-center justify-center gap-3">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
-                            <span>Simpan</span>
-                        </button>
-                    </div>
-
                 </div>
 
-                {{-- RIGHT COLUMN - Event Details (60%) --}}
-                <div class="lg:col-span-3 space-y-6">
+                {{-- RIGHT COLUMN - Title, Details, Description --}}
+                <div class="order-1 lg:order-2 space-y-6">
 
                     {{-- Title Card --}}
                     <div
-                        class="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 rounded-3xl shadow-2xl p-8 relative overflow-hidden group">
+                        class="bg-gradient-to-r from-blue-600 via-blue-500 to-purple-600 rounded-3xl shadow-2xl p-6 md:p-8 relative overflow-hidden group">
 
                         {{-- Animated Background Shapes --}}
                         <div
@@ -146,82 +105,70 @@
 
                         {{-- Content --}}
                         <div class="relative">
-                            <div class="flex items-start gap-4 mb-3">
-                                <div class="bg-white/20 backdrop-blur-sm p-3 rounded-2xl">
-                                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
+                            <div class="flex items-start gap-4">
+                                <div class="bg-white/20 backdrop-blur-sm p-3 rounded-2xl flex-shrink-0">
+                                    <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor"
                                         viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                                     </svg>
                                 </div>
                                 <div class="flex-1">
-                                    <p class="text-blue-100 text-sm font-medium mb-2">FEATURED EVENT</p>
-                                    <h1 class="text-3xl md:text-4xl font-bold text-white leading-tight tracking-tight">
+                                    <p class="text-blue-100 text-xs md:text-sm font-medium mb-2 uppercase tracking-wider">
+                                        Featured Event</p>
+                                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight">
                                         {{ $event->nama_event }}
                                     </h1>
                                 </div>
                             </div>
-
-                            {{-- Status Badge --}}
-                            <div
-                                class="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-medium mt-2">
-                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                                Pendaftaran Dibuka
-                            </div>
                         </div>
                     </div>
 
-                    {{-- Info Cards Grid --}}
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {{-- Detail Event Cards - 3 in 1 Row --}}
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
 
                         {{-- Date Card --}}
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                            <div class="flex items-center gap-4">
+                            <div class="text-center">
                                 <div
-                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white text-2xl shadow-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
                                     📅
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Tanggal</p>
-                                    <p class="font-bold text-gray-900 text-sm mt-1 leading-tight">
-                                        {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d M Y') }}
-                                    </p>
-                                </div>
+                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Tanggal</p>
+                                <p class="font-bold text-gray-900 text-sm leading-tight">
+                                    {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
+                                </p>
                             </div>
                         </div>
 
                         {{-- Location Card --}}
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                            <div class="flex items-center gap-4">
+                            <div class="text-center">
                                 <div
-                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-2xl shadow-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
                                     📍
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Lokasi</p>
-                                    <p class="font-bold text-gray-900 text-sm mt-1 leading-tight">
-                                        {{ $event->lokasi }}
-                                    </p>
-                                </div>
+                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Lokasi</p>
+                                <p class="font-bold text-gray-900 text-sm leading-tight">
+                                    {{ $event->lokasi }}
+                                </p>
                             </div>
                         </div>
 
                         {{-- Speaker Card --}}
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                            <div class="flex items-center gap-4">
+                            <div class="text-center">
                                 <div
-                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
+                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 text-white text-2xl shadow-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
                                     🎤
                                 </div>
-                                <div>
-                                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider">Pembicara</p>
-                                    <p class="font-bold text-gray-900 text-sm mt-1 leading-tight">
-                                        {{ $event->pengisi ?? '-' }}
-                                    </p>
-                                </div>
+                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Pengisi Acara</p>
+                                <p class="font-bold text-gray-900 text-sm leading-tight">
+                                    {{ $event->pengisi ?? '-' }}
+                                </p>
                             </div>
                         </div>
 
@@ -234,7 +181,7 @@
                         {{-- Section Header --}}
                         <div class="flex items-center gap-3 mb-6 pb-4 border-b-2 border-gray-100">
                             <div
-                                class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg">
+                                class="w-10 h-10 flex items-center justify-center rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white shadow-lg flex-shrink-0">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -250,37 +197,6 @@
                             <p class="text-gray-700 text-base md:text-lg leading-relaxed text-justify">
                                 {{ $event->deskripsi }}
                             </p>
-                        </div>
-
-                        {{-- Tags or Categories (Optional) --}}
-                        <div class="mt-6 pt-6 border-t border-gray-100">
-                            <div class="flex flex-wrap gap-2">
-                                <span class="px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium">
-                                    #Event
-                                </span>
-                                <span class="px-4 py-2 bg-purple-50 text-purple-700 rounded-full text-sm font-medium">
-                                    #Workshop
-                                </span>
-                                <span class="px-4 py-2 bg-pink-50 text-pink-700 rounded-full text-sm font-medium">
-                                    #Networking
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-
-                    {{-- CTA Button --}}
-                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-3xl shadow-2xl p-6 md:p-8">
-                        <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                            <div class="text-white text-center md:text-left">
-                                <h3 class="text-xl md:text-2xl font-bold mb-2">Tertarik Mengikuti Event Ini?</h3>
-                                <p class="text-blue-100">Daftar sekarang dan dapatkan pengalaman tak terlupakan!</p>
-                            </div>
-                            <button
-                                class="bg-white text-blue-600 hover:bg-blue-50 font-bold py-4 px-8 rounded-2xl
-                                       shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300
-                                       whitespace-nowrap">
-                                Daftar Sekarang →
-                            </button>
                         </div>
                     </div>
 
@@ -299,7 +215,7 @@
                 <button onclick="closeFlyerModal()"
                     class="absolute top-6 right-6 w-12 h-12 flex items-center justify-center rounded-full
                        bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white hover:rotate-90
-                       transition-all duration-300 z-10 group">
+                       transition-all duration-300 z-10">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                     </svg>
