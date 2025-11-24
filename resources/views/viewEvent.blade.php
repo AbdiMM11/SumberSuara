@@ -23,11 +23,15 @@
     <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20 py-8 px-4 sm:py-12">
         <div class="max-w-7xl mx-auto">
 
-            {{-- Main Content Grid - 2 Columns --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+            @php
+                $flyer = $event->flyer ? asset('storage/app/public/' . $event->flyer) : 'https://picsum.photos/400/600';
+            @endphp
 
-                {{-- LEFT COLUMN - Flyer --}}
-                <div class="order-2 lg:order-1">
+            {{-- Main Content - Flex Layout for Desktop --}}
+            <div class="flex flex-col lg:flex-row gap-6 lg:gap-8">
+
+                {{-- LEFT COLUMN - Flyer (40% width on desktop) --}}
+                <div class="w-full lg:w-[40%] order-2 lg:order-1">
                     <div
                         class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative lg:sticky lg:top-8">
 
@@ -38,12 +42,6 @@
                         <div
                             class="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-tr from-pink-400/10 to-orange-400/10 rounded-full blur-3xl">
                         </div>
-
-                        @php
-                            $flyer = $event->flyer
-                                ? asset('storage/app/public/' . $event->flyer)
-                                : 'https://picsum.photos/400/600';
-                        @endphp
 
                         <div class="relative">
                             {{-- Flyer Image --}}
@@ -85,8 +83,8 @@
                     </div>
                 </div>
 
-                {{-- RIGHT COLUMN - Title, Details, Description --}}
-                <div class="order-1 lg:order-2 space-y-6">
+                {{-- RIGHT COLUMN - Title, Details, Description (60% width on desktop) --}}
+                <div class="w-full lg:w-[60%] order-1 lg:order-2 flex flex-col gap-6">
 
                     {{-- Title Card --}}
                     <div
@@ -218,7 +216,7 @@
 
             {{-- Modal Flyer --}}
             <div id="flyer-modal"
-                class="fixed inset-0 bg-black/80 backdrop-blur-md hidden z-50 items-center justify-center px-4 animate-fade-in"
+                class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 items-center justify-center px-4 animate-fade-in"
                 style="display: none;">
 
                 {{-- Close on backdrop click --}}
@@ -281,14 +279,12 @@
         function openFlyerModal() {
             const modal = document.getElementById('flyer-modal');
             modal.style.display = 'flex';
-            modal.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
         function closeFlyerModal() {
             const modal = document.getElementById('flyer-modal');
             modal.style.display = 'none';
-            modal.classList.add('hidden');
             document.body.style.overflow = 'auto';
         }
 
