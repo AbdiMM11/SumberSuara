@@ -23,13 +23,13 @@
     <div class="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-purple-50/20 py-8 px-4 sm:py-12">
         <div class="max-w-7xl mx-auto">
 
-            {{-- Main Content Grid - 2 Columns --}}
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+            {{-- Main Content Grid - 2 Columns (50-50) --}}
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
 
-                {{-- LEFT COLUMN - Flyer Only --}}
-                <div class="order-2 lg:order-1">
+                {{-- LEFT COLUMN - Flyer (5 columns) --}}
+                <div class="lg:col-span-5">
                     <div
-                        class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative sticky top-8">
+                        class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 p-5 overflow-hidden relative lg:sticky lg:top-8">
 
                         {{-- Decorative Background --}}
                         <div
@@ -53,7 +53,7 @@
                                    focus:outline-none focus:ring-4 focus:ring-blue-500/50 group">
 
                                 <img src="{{ $flyer }}" alt="Event Flyer"
-                                    class="w-full h-auto max-h-[600px] object-cover rounded-2xl">
+                                    class="w-full h-auto object-cover rounded-2xl">
 
                                 {{-- Overlay on Hover --}}
                                 <div
@@ -85,8 +85,8 @@
                     </div>
                 </div>
 
-                {{-- RIGHT COLUMN - Title, Details, Description --}}
-                <div class="order-1 lg:order-2 space-y-6">
+                {{-- RIGHT COLUMN - Title, Details, Description (7 columns) --}}
+                <div class="lg:col-span-7 space-y-6">
 
                     {{-- Title Card --}}
                     <div
@@ -124,51 +124,58 @@
                         </div>
                     </div>
 
-                    {{-- Detail Event Cards - 3 in 1 Row --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {{-- Detail Event Cards - Logo Kiri, Text Kanan --}}
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
 
                         {{-- Date Card --}}
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                            <div class="text-center">
+                            <div class="flex items-center gap-4">
                                 <div
-                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white text-2xl shadow-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                    class="w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-orange-400 to-red-500 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
                                     📅
                                 </div>
-                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Tanggal</p>
-                                <p class="font-bold text-gray-900 text-sm leading-tight">
-                                    {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
-                                </p>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Tanggal</p>
+                                    <p class="font-bold text-gray-900 text-sm leading-tight">
+                                        {{ \Carbon\Carbon::parse($event->tanggal)->translatedFormat('d F Y') }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
                         {{-- Location Card --}}
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                            <div class="text-center">
+                            <div class="flex items-center gap-4">
                                 <div
-                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-2xl shadow-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                    class="w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-yellow-400 to-orange-500 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
                                     📍
                                 </div>
-                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Lokasi</p>
-                                <p class="font-bold text-gray-900 text-sm leading-tight">
-                                    {{ $event->lokasi }}
-                                </p>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Lokasi</p>
+                                    <p class="font-bold text-gray-900 text-sm leading-tight">
+                                        {{ $event->lokasi }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
                         {{-- Speaker Card --}}
                         <div
                             class="bg-white rounded-2xl shadow-lg hover:shadow-xl p-5 transition-all duration-300 hover:-translate-y-2 border border-gray-100 group">
-                            <div class="text-center">
+                            <div class="flex items-center gap-4">
                                 <div
-                                    class="w-14 h-14 flex items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 text-white text-2xl shadow-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                                    class="w-14 h-14 flex-shrink-0 flex items-center justify-center rounded-2xl bg-gradient-to-br from-green-400 to-emerald-500 text-white text-2xl shadow-lg group-hover:scale-110 transition-transform duration-300">
                                     🎤
                                 </div>
-                                <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-2">Pengisi Acara</p>
-                                <p class="font-bold text-gray-900 text-sm leading-tight">
-                                    {{ $event->pengisi ?? '-' }}
-                                </p>
+                                <div class="flex-1 min-w-0">
+                                    <p class="text-xs text-gray-500 font-medium uppercase tracking-wider mb-1">Pengisi Acara
+                                    </p>
+                                    <p class="font-bold text-gray-900 text-sm leading-tight">
+                                        {{ $event->pengisi ?? '-' }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
 
