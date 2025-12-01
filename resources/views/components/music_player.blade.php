@@ -445,8 +445,28 @@
     }
 
     function toggleShuffleUI(active) {
-        shuffleBtn?.classList.toggle("bg-white/20", active);
-        detailShuffleBtn?.classList.toggle("bg-blue-100", active);
+        isShuffle = !!active; // pastikan boolean
+
+        // Tombol shuffle desktop
+        if (shuffleBtn) {
+            shuffleBtn.classList.toggle("bg-white/5", !isShuffle);
+            shuffleBtn.classList.toggle("bg-white", isShuffle);
+            shuffleBtn.classList.toggle("text-[#1C4E95]", isShuffle);
+            shuffleBtn.classList.toggle("ring-2", isShuffle);
+            shuffleBtn.classList.toggle("ring-white", isShuffle);
+            shuffleBtn.classList.toggle("scale-110", isShuffle);
+        }
+
+        // Tombol shuffle di mobile detail
+        if (detailShuffleBtn) {
+            detailShuffleBtn.classList.toggle("bg-[#1C4E95]", !isShuffle);
+            detailShuffleBtn.classList.toggle("bg-white", isShuffle);
+            detailShuffleBtn.classList.toggle("text-white", !isShuffle);
+            detailShuffleBtn.classList.toggle("text-[#1C4E95]", isShuffle);
+            detailShuffleBtn.classList.toggle("ring-2", isShuffle);
+            detailShuffleBtn.classList.toggle("ring-white", isShuffle);
+            detailShuffleBtn.classList.toggle("scale-110", isShuffle);
+        }
     }
 
     function toggleLove() {
