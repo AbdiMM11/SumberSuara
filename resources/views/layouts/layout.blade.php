@@ -15,6 +15,15 @@
     <x-navbar />
 
     <main class="max-w-7xl mx-auto px-6 py-8 pb-32 pt-24">
+        {{-- Notifikasi global --}}
+        @if (session('success'))
+            <div class="mb-4">
+                <div class="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm text-emerald-800 shadow-sm">
+                    {{ session('success') }}
+                </div>
+            </div>
+        @endif
+
         @yield('content')
     </main>
 

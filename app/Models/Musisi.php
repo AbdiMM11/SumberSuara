@@ -111,35 +111,22 @@ class Musisi extends Model
         return $this->status === 'rejected';
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS SOSIAL MEDIA
-    |--------------------------------------------------------------------------
-    */
-
     public function setSpotifyAttribute($value)
     {
-        $this->attributes['spotify'] = $this->cleanSocialUsername($value);
+        $this->attributes['spotify'] = $this->cleanSocialUrl($value);
     }
 
     public function setInstagramAttribute($value)
     {
-        $this->attributes['instagram'] = $this->cleanSocialUsername($value);
+        $this->attributes['instagram'] = $this->cleanSocialUrl($value);
     }
 
     public function setYoutubeAttribute($value)
     {
-        $this->attributes['youtube'] = $this->cleanSocialUsername($value);
+        $this->attributes['youtube'] = $this->cleanSocialUrl($value);
     }
 
-    /**
-     * Bersihkan input username/ID sosmed:
-     * - trim spasi
-     * - jika user paste link (http / www), ambil segmen terakhir setelah '/'
-     * - hapus '@' di awal jika ada
-     * - jika kosong → null
-     */
-    protected function cleanSocialUsername($value): ?string
+    protected function cleanSocialUrl($value): ?string
     {
         if ($value === null) {
             return null;
@@ -150,19 +137,6 @@ class Musisi extends Model
         if ($value === '') {
             return null;
         }
-
-        // kalau mengandung http / www, berarti kemungkinan besar link
-        if (str_contains($value, 'http') || str_contains($value, 'www.')) {
-            $parts = explode('/', rtrim($value, '/'));
-            $last  = end($parts);
-
-            if (!empty($last)) {
-                $value = $last;
-            }
-        }
-
-        // hapus '@' di awal
-        $value = ltrim($value, '@');
 
         return $value;
     }

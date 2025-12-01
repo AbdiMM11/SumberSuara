@@ -20,19 +20,20 @@ class IndexController extends Controller
         |   - q_musisi, genre_musisi, domisili_musisi (pakai name lama: q, genre, domisili)
         |--------------------------------------------------------------------------
         */
-        $qMusisi       = trim((string) $request->input('q', ''));
-        $genreMusisi   = (string) $request->input('genre', '');
+        $qMusisi        = trim((string) $request->input('q', ''));
+        $genreMusisi    = (string) $request->input('genre', '');
         $domisiliMusisi = (string) $request->input('domisili', '');
 
         /*
         |--------------------------------------------------------------------------
         | PARAMETER UNTUK PLAYLIST LAGU SIDEBAR
-        |   - hanya q_song + genre_song
+        |   - q_song + genre_song + song_sort
         |   - TIDAK mempengaruhi grid musisi
         |--------------------------------------------------------------------------
         */
         $qSong     = trim((string) $request->input('q_song', ''));
         $genreSong = (string) $request->input('genre_song', '');
+        $songSort  = (string) $request->input('song_sort', ''); // '', 'favorite', 'last_update'
 
         /*
         |--------------------------------------------------------------------------
@@ -79,8 +80,7 @@ class IndexController extends Controller
                   ->whereHas('user', function ($u) {
                       $u->where('is_active', true);
                   });
-            })
-            ->orderByDesc('updated_at');
+            });
 
         // optional: hanya lagu berstatus published kalau kolom status ada
         if (Schema::hasColumn((new Karya)->getTable(), 'status')) {
@@ -106,11 +106,31 @@ class IndexController extends Controller
             });
         });
 
+        /*
+        |--------------------------------------------------------------------------
+        | SORTING PLAYLIST LAGU
+        |   - default       : created_at desc
+        |   - favorite      : jumlah like terbanyak
+        |   - last_update   : updated_at desc
+        |--------------------------------------------------------------------------
+        */
+        if ($songSort === 'favorite') {
+            // hitung jumlah favorit per lagu
+            $songQuery->withCount('laguFavorit')
+                      ->orderByDesc('lagu_favorit_count')
+                      ->orderByDesc('updated_at'); // tie breaker kalau count sama
+        } elseif ($songSort === 'last_update') {
+            $songQuery->orderByDesc('updated_at');
+        } else {
+            // default
+            $songQuery->orderByDesc('created_at');
+        }
+
         $songs = $songQuery->limit(15)->get();
 
         /*
         |--------------------------------------------------------------------------
-        | FAVORIT ID
+        | FAVORIT ID (untuk icon ❤️ di player)
         |--------------------------------------------------------------------------
         */
         $favoriteIds = [];
@@ -132,8 +152,11 @@ class IndexController extends Controller
             // untuk playlist
             'qSong'        => $qSong,
             'genreSong'    => $genreSong,
+            'songSort'     => $songSort,
 
             'favoriteIds'  => $favoriteIds,
         ]);
     }
 }
+
+
