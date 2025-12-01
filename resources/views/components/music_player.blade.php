@@ -413,10 +413,35 @@
         }
     }
 
+    function updateRepeatUI() {
+        // Tombol repeat desktop
+        if (repeatBtn) {
+            // background dasar vs aktif
+            repeatBtn.classList.toggle("bg-white/5", !isRepeat);
+            repeatBtn.classList.toggle("bg-white", isRepeat);
+
+            // efek visual tambahan
+            repeatBtn.classList.toggle("ring-2", isRepeat);
+            repeatBtn.classList.toggle("ring-white", isRepeat);
+            repeatBtn.classList.toggle("scale-110", isRepeat);
+        }
+
+        // Tombol repeat di mobile detail
+        if (detailRepeatBtn) {
+            detailRepeatBtn.classList.toggle("bg-[#1C4E95]", !isRepeat);
+            detailRepeatBtn.classList.toggle("bg-white", isRepeat);
+            detailRepeatBtn.classList.toggle("text-white", !isRepeat);
+            detailRepeatBtn.classList.toggle("text-[#1C4E95]", isRepeat);
+
+            detailRepeatBtn.classList.toggle("ring-2", isRepeat);
+            detailRepeatBtn.classList.toggle("ring-white", isRepeat);
+            detailRepeatBtn.classList.toggle("scale-110", isRepeat);
+        }
+    }
+
     function toggleRepeat() {
         isRepeat = !isRepeat;
-        if (repeatBtn) repeatBtn.classList.toggle("bg-white/20", isRepeat);
-        if (detailRepeatBtn) detailRepeatBtn.classList.toggle("bg-blue-100", isRepeat);
+        updateRepeatUI();
     }
 
     function toggleShuffleUI(active) {
